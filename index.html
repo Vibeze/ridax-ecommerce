@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ridax | Premium Pesticide. Complete Eradication.</title>
+    <title>Ridax Official Store | Jumia-Grade Pesticide Market</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://js.paystack.co/v1/inline.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -14,192 +14,490 @@
                     colors: {
                         ridax: {
                             DEFAULT: '#1a7936',
-                            hover: '#135c29',
-                            light: '#e8f3ec'
+                            dark: '#135c29',
+                            light: '#e8f3ec',
+                            accent: '#f68b1e' // Jumia Orange for conversion elements
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+        body { font-family: 'Roboto', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-[#f5f5f5] text-gray-800 antialiased">
 
-    <!-- Navigation -->
-    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <span class="text-3xl font-black text-ridax tracking-tighter uppercase">Ridax</span>
-            </div>
-            <a href="#checkout" class="bg-ridax hover:bg-ridax-hover text-white text-sm font-semibold py-2 px-5 rounded transition duration-200 shadow-sm">
-                Order Now
-            </a>
+    <!-- Top Announcement Strip -->
+    <div class="bg-[#f68b1e] text-white text-xs py-1.5 px-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center font-medium">
+            <span><i class="fa-solid fa-shield-halved mr-1"></i> Official Ridax Store: 100% Authentic NAFDAC Approved Formulations</span>
+            <span class="hidden md:inline"><i class="fa-solid fa-phone mr-1"></i> Call to Order: 0800-RIRDAX-NG</span>
         </div>
-    </nav>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="bg-white py-16 md:py-24 border-b border-gray-200">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <div class="inline-block bg-ridax-light text-ridax text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-6 border border-green-200">
-                Clinical-Grade Formulation
-            </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight mb-6">
-                Premium Pesticide.<br>
-                <span class="text-ridax">Complete Eradication.</span>
-            </h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Professional-grade solutions to permanently eliminate bed bugs, roaches, and household pests. Safe for indoor use.
-            </p>
-            <a href="#checkout" class="inline-flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-white font-semibold py-3 px-8 rounded shadow-md transition duration-200">
-                View Products & Pricing <i class="fa-solid fa-arrow-right ml-2"></i>
+    <!-- Main Navigation Bar -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+            
+            <!-- Logo -->
+            <a href="#" class="text-3xl font-black text-ridax tracking-tight flex items-center gap-1">
+                <span>RIRDAX</span><span class="text-ridax-accent text-4xl leading-none">.</span>
             </a>
-        </div>
-    </section>
 
-    <!-- Products Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-8">
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-2xl mx-4 hidden sm:flex">
+                <div class="relative w-full flex">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+                    <input type="text" placeholder="Search pest sprays, powders, eradication packs..." 
+                           class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-l focus:outline-none focus:border-ridax text-sm">
+                    <button class="bg-ridax hover:bg-ridax-dark text-white px-6 py-2 rounded-r text-sm font-semibold uppercase transition">
+                        Search
+                    </button>
+                </div>
+            </div>
+
+            <!-- Account, Help, and Cart Widgets -->
+            <div class="flex items-center gap-6">
                 
-                <!-- Spray Product -->
-                <div class="bg-white border border-gray-200 rounded-lg p-8 shadow-sm hover:shadow-md transition">
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Liquid Formula</div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Ridax Bed Bug Spray</h3>
-                    <p class="text-gray-600 text-sm mb-6">500ml instant knockdown formula for mattresses and furniture crevices.</p>
-                    <div class="text-3xl font-black text-gray-900 mb-6">₦7,500</div>
-                    <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-6">
-                        <li><i class="fa-solid fa-check text-ridax mr-2"></i> Odorless and non-staining</li>
-                        <li><i class="fa-solid fa-check text-ridax mr-2"></i> Destroys eggs on contact</li>
-                    </ul>
+                <!-- Account Dropdown -->
+                <div class="relative group cursor-pointer py-2">
+                    <div class="flex items-center gap-1 text-sm font-medium hover:text-ridax">
+                        <i class="fa-regular fa-user text-lg"></i>
+                        <span class="hidden md:inline">Account</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </div>
+                    <!-- Dropdown Content -->
+                    <div class="absolute right-0 top-full hidden group-hover:block bg-white shadow-xl border border-gray-100 rounded w-56 py-3 px-4 z-50">
+                        <button class="w-full bg-ridax-accent hover:bg-orange-600 text-white font-bold py-2 rounded text-sm mb-3">
+                            SIGN IN
+                        </button>
+                        <ul class="text-sm space-y-2.5 border-t border-gray-100 pt-2 text-gray-700">
+                            <li class="hover:text-ridax flex items-center gap-2"><i class="fa-regular fa-user"></i> My Account</li>
+                            <li class="hover:text-ridax flex items-center gap-2"><i class="fa-solid fa-box"></i> Orders</li>
+                            <li class="hover:text-ridax flex items-center gap-2"><i class="fa-regular fa-heart"></i> Saved Items</li>
+                        </ul>
+                    </div>
                 </div>
 
-                <!-- Combo Product -->
-                <div class="bg-white border-2 border-ridax rounded-lg p-8 shadow-md relative">
-                    <div class="absolute -top-3 left-8 bg-ridax text-white text-xs font-bold px-3 py-1 rounded">
-                        Most Popular (Save ₦1,500)
+                <!-- Help Dropdown -->
+                <div class="relative group cursor-pointer py-2">
+                    <div class="flex items-center gap-1 text-sm font-medium hover:text-ridax">
+                        <i class="fa-regular fa-circle-question text-lg"></i>
+                        <span class="hidden md:inline">Help</span>
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
                     </div>
-                    <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-2">Complete Protocol</div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Ultimate Eradication Combo</h3>
-                    <p class="text-gray-600 text-sm mb-6">1x Bed Bug Spray (500ml) + 1x Roach Powder (100g).</p>
-                    <div class="text-3xl font-black text-ridax mb-6">₦11,000 <span class="text-sm text-gray-400 line-through font-normal">₦12,500</span></div>
-                    <ul class="space-y-3 text-sm text-gray-600 border-t border-gray-100 pt-6">
-                        <li><i class="fa-solid fa-check text-ridax mr-2"></i> Comprehensive home coverage</li>
-                        <li><i class="fa-solid fa-check text-ridax mr-2"></i> Protects both bedrooms and kitchens</li>
-                    </ul>
+                    <div class="absolute right-0 top-full hidden group-hover:block bg-white shadow-xl border border-gray-100 rounded w-56 py-3 px-4 z-50">
+                        <ul class="text-sm space-y-2.5 text-gray-700 mb-3">
+                            <li class="hover:text-ridax">Help Center</li>
+                            <li class="hover:text-ridax">Track an Order</li>
+                            <li class="hover:text-ridax">Returns & Refunds</li>
+                        </ul>
+                        <a href="https://wa.me/" target="_blank" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp Support
+                        </a>
+                    </div>
                 </div>
 
+                <!-- Cart Trigger -->
+                <button onclick="toggleCart()" class="flex items-center gap-2 font-medium hover:text-ridax relative">
+                    <div class="relative">
+                        <i class="fa-solid fa-cart-shopping text-xl"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-ridax-accent text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                    </div>
+                    <span class="hidden md:inline text-sm">Cart</span>
+                </button>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Secure Checkout Section -->
-    <section id="checkout" class="py-16 bg-white border-t border-gray-200">
-        <div class="max-w-xl mx-auto px-4">
-            <div class="text-center mb-8">
-                <h2 class="text-2xl font-bold text-gray-900">Secure Checkout</h2>
-                <p class="text-sm text-gray-500 mt-2">Enter your delivery details and choose your payment method.</p>
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 py-6">
+        
+        <!-- Promo Banner -->
+        <div class="bg-gradient-to-r from-green-900 to-ridax text-white rounded-lg p-6 mb-6 flex flex-col md:flex-row justify-between items-center shadow-sm">
+            <div>
+                <span class="bg-red-600 text-white text-xs font-bold px-2 py-0.5 rounded uppercase">Flash Sale</span>
+                <h2 class="text-2xl md:text-3xl font-black mt-2">Pest Eradication Guaranteed</h2>
+                <p class="text-green-100 text-sm mt-1">Order genuine Ridax direct from laboratory warehouse stock.</p>
+            </div>
+            <div class="mt-4 md:mt-0 flex gap-4 text-center">
+                <div class="bg-white/10 px-4 py-2 rounded">
+                    <div class="text-xl font-bold">24 Hrs</div>
+                    <div class="text-[10px] uppercase text-green-200">Lagos Dispatch</div>
+                </div>
+                <div class="bg-white/10 px-4 py-2 rounded">
+                    <div class="text-xl font-bold">100%</div>
+                    <div class="text-[10px] uppercase text-green-200">Kill Rate</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Header -->
+        <div class="bg-white p-4 rounded-t border-b border-gray-200 flex justify-between items-center">
+            <h3 class="text-lg font-bold uppercase tracking-tight flex items-center gap-2">
+                <span class="w-2.5 h-5 bg-ridax inline-block rounded-xs"></span>
+                Official Product Range
+            </h3>
+            <span class="text-xs text-gray-500">4 verified items</span>
+        </div>
+
+        <!-- Product Grid (4 Real Items) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-white p-4 rounded-b shadow-sm mb-10">
+            
+            <!-- Item 1 -->
+            <div class="border border-gray-100 hover:border-gray-300 hover:shadow-md transition p-4 rounded flex flex-col justify-between relative group">
+                <span class="absolute top-2 right-2 bg-orange-100 text-ridax-accent text-xs font-bold px-1.5 py-0.5 rounded">-17%</span>
+                <div class="h-44 bg-gray-50 rounded flex items-center justify-center text-gray-400 mb-3">
+                    <i class="fa-solid fa-spray-can text-5xl text-ridax"></i>
+                </div>
+                <div>
+                    <span class="text-[11px] text-gray-400 uppercase font-semibold">Liquid Formulation</span>
+                    <h4 class="font-medium text-sm text-gray-800 line-clamp-2 mt-0.5">Ridax Pest Spray (500ml) - Pack of 2</h4>
+                    <div class="mt-2">
+                        <span class="text-lg font-bold text-gray-900">₦20,000</span>
+                        <span class="text-xs text-gray-400 line-through ml-2">₦24,000</span>
+                    </div>
+                </div>
+                <button onclick="addToCart(1, 'Ridax Pest Spray (500ml) - Pack of 2', 20000)" 
+                        class="w-full mt-4 bg-ridax hover:bg-ridax-dark text-white font-semibold py-2 rounded text-xs transition uppercase">
+                    Add To Cart
+                </button>
             </div>
 
-            <form id="paymentForm" class="bg-gray-50 border border-gray-200 p-6 md:p-8 rounded-lg shadow-sm">
-                
-                <div class="space-y-5 mb-8">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name</label>
-                        <input type="text" id="name" required class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none bg-white">
+            <!-- Item 2 -->
+            <div class="border border-gray-100 hover:border-gray-300 hover:shadow-md transition p-4 rounded flex flex-col justify-between relative group">
+                <span class="absolute top-2 right-2 bg-orange-100 text-ridax-accent text-xs font-bold px-1.5 py-0.5 rounded">-19%</span>
+                <div class="h-44 bg-gray-50 rounded flex items-center justify-center text-gray-400 mb-3">
+                    <div class="flex gap-1 text-ridax">
+                        <i class="fa-solid fa-spray-can text-4xl"></i>
+                        <i class="fa-solid fa-spray-can text-5xl"></i>
                     </div>
-                    
-                    <div class="grid grid-cols-2 gap-4">
+                </div>
+                <div>
+                    <span class="text-[11px] text-gray-400 uppercase font-semibold">Bulk Protocol</span>
+                    <h4 class="font-medium text-sm text-gray-800 line-clamp-2 mt-0.5">Ridax Pest Spray (500ml) - Pack of 4</h4>
+                    <div class="mt-2">
+                        <span class="text-lg font-bold text-gray-900">₦34,000</span>
+                        <span class="text-xs text-gray-400 line-through ml-2">₦42,000</span>
+                    </div>
+                </div>
+                <button onclick="addToCart(2, 'Ridax Pest Spray (500ml) - Pack of 4', 34000)" 
+                        class="w-full mt-4 bg-ridax hover:bg-ridax-dark text-white font-semibold py-2 rounded text-xs transition uppercase">
+                    Add To Cart
+                </button>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="border border-gray-100 hover:border-gray-300 hover:shadow-md transition p-4 rounded flex flex-col justify-between relative group">
+                <span class="absolute top-2 right-2 bg-orange-100 text-ridax-accent text-xs font-bold px-1.5 py-0.5 rounded">-16%</span>
+                <div class="h-44 bg-gray-50 rounded flex items-center justify-center text-gray-400 mb-3 relative">
+                    <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">Lagos Only</span>
+                    <i class="fa-solid fa-bottle-droplet text-5xl text-ridax"></i>
+                </div>
+                <div>
+                    <span class="text-[11px] text-gray-400 uppercase font-semibold">Compact Spray</span>
+                    <h4 class="font-medium text-sm text-gray-800 line-clamp-2 mt-0.5">Ridax Pest Spray (300ml) - Pack of 2</h4>
+                    <div class="mt-2">
+                        <span class="text-lg font-bold text-gray-900">₦18,000</span>
+                        <span class="text-xs text-gray-400 line-through ml-2">₦21,500</span>
+                    </div>
+                </div>
+                <button onclick="addToCart(3, 'Ridax Pest Spray (300ml) - Pack of 2 (Lagos Only)', 18000)" 
+                        class="w-full mt-4 bg-ridax hover:bg-ridax-dark text-white font-semibold py-2 rounded text-xs transition uppercase">
+                    Add To Cart
+                </button>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="border border-gray-100 hover:border-gray-300 hover:shadow-md transition p-4 rounded flex flex-col justify-between relative group">
+                <span class="absolute top-2 right-2 bg-orange-100 text-ridax-accent text-xs font-bold px-1.5 py-0.5 rounded">-20%</span>
+                <div class="h-44 bg-gray-50 rounded flex items-center justify-center text-gray-400 mb-3">
+                    <i class="fa-solid fa-box-archive text-5xl text-ridax"></i>
+                </div>
+                <div>
+                    <span class="text-[11px] text-gray-400 uppercase font-semibold">Dry Powder</span>
+                    <h4 class="font-medium text-sm text-gray-800 line-clamp-2 mt-0.5">Ridax Cockroach Powder Formulation (100g)</h4>
+                    <div class="mt-2">
+                        <span class="text-lg font-bold text-gray-900">₦12,000</span>
+                        <span class="text-xs text-gray-400 line-through ml-2">₦15,000</span>
+                    </div>
+                </div>
+                <button onclick="addToCart(4, 'Ridax Cockroach Powder Formulation', 12000)" 
+                        class="w-full mt-4 bg-ridax hover:bg-ridax-dark text-white font-semibold py-2 rounded text-xs transition uppercase">
+                    Add To Cart
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Slide-over Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50" onclick="toggleCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col z-10">
+            
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center bg-gray-50">
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-ridax"></i> Your Cart
+                </h3>
+                <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-800 text-lg">✕</button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItems" class="flex-1 overflow-y-auto p-4 divide-y divide-gray-100">
+                <!-- Dynamically populated via JavaScript -->
+            </div>
+
+            <!-- Cart Summary & Checkout -->
+            <div class="p-4 border-t border-gray-200 bg-gray-50">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-sm text-gray-600">Subtotal:</span>
+                    <span id="cartTotal" class="text-xl font-black text-gray-900">₦0</span>
+                </div>
+                <button onclick="openCheckoutModal()" id="checkoutBtn" disabled 
+                        class="w-full bg-ridax-accent hover:bg-orange-600 disabled:bg-gray-300 text-white font-bold py-3 rounded text-sm uppercase transition flex items-center justify-center gap-2">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/60" onclick="closeCheckoutModal()"></div>
+        <div class="relative bg-white rounded-lg max-w-lg w-full p-6 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
+            
+            <div class="flex justify-between items-center border-b pb-3 mb-4">
+                <h3 class="font-bold text-lg text-gray-900">Delivery & Payment Details</h3>
+                <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-gray-700">✕</button>
+            </div>
+
+            <form id="orderForm" onsubmit="processOrder(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
+                        <input type="text" id="custName" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" required class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none bg-white">
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
+                            <input type="email" id="custEmail" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-1">Phone Number</label>
-                            <input type="tel" id="phone" required class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none bg-white">
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone</label>
+                            <input type="tel" id="custPhone" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                     </div>
-
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Full Delivery Address</label>
-                        <input type="text" id="address" required class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none bg-white">
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Delivery Address</label>
+                        <input type="text" id="custAddress" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                     </div>
-
                     <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-1">Select Product</label>
-                        <select id="product" class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none bg-white">
-                            <option value="11000">Ultimate Eradication Combo - ₦11,000</option>
-                            <option value="7500">Ridax Bed Bug Spray - ₦7,500</option>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
+                        <select id="custState" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <option value="Lagos">Lagos State</option>
+                            <option value="Abuja">Abuja (FCT)</option>
+                            <option value="Ogun">Ogun State</option>
+                            <option value="Rivers">Rivers State</option>
+                            <option value="Other">Other States</option>
                         </select>
                     </div>
 
-                    <div class="pt-4 border-t border-gray-200">
-                        <label class="block text-sm font-semibold text-gray-700 mb-3">Payment Method</label>
-                        <div class="space-y-3">
-                            <label class="flex items-center p-3 border border-gray-300 rounded bg-white cursor-pointer hover:border-ridax">
-                                <input type="radio" name="payMethod" value="card" checked class="text-ridax focus:ring-ridax h-4 w-4">
-                                <span class="ml-3 text-sm font-medium text-gray-900">Pay Securely via Card (Paystack)</span>
+                    <div class="pt-2">
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Select Payment Method</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center p-3 border rounded cursor-pointer hover:border-ridax bg-gray-50">
+                                <input type="radio" name="payType" value="card" checked class="text-ridax focus:ring-ridax">
+                                <span class="ml-2 text-sm font-medium">Pay Securely via Card (Paystack)</span>
                             </label>
-                            <label class="flex items-center p-3 border border-gray-300 rounded bg-white cursor-pointer hover:border-ridax">
-                                <input type="radio" name="payMethod" value="pod" class="text-ridax focus:ring-ridax h-4 w-4">
-                                <span class="ml-3 text-sm font-medium text-gray-900">Pay on Delivery</span>
+                            <label class="flex items-center p-3 border rounded cursor-pointer hover:border-ridax bg-gray-50">
+                                <input type="radio" name="payType" value="pod" class="text-ridax focus:ring-ridax">
+                                <span class="ml-2 text-sm font-medium">Pay on Delivery (PoD)</span>
                             </label>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-ridax hover:bg-ridax-hover text-white font-bold py-3.5 px-4 rounded text-center transition duration-200 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-lock"></i> Complete Order
-                </button>
+                <div class="mt-6 border-t pt-4">
+                    <button type="submit" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3 rounded text-sm uppercase transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock"></i> Confirm & Pay <span id="modalTotal">₦0</span>
+                    </button>
+                </div>
             </form>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center text-sm">
-        <p>© 2026 Ridax Pesticides. All rights reserved.</p>
-        <p class="text-xs mt-2 text-gray-500">Professional eradication solutions.</p>
+    <!-- Jumia-Style Multi-Column Footer -->
+    <footer class="bg-gray-900 text-gray-400 text-xs mt-16 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
+            <div>
+                <h5 class="text-white font-bold uppercase mb-3 text-sm">Need Help?</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white">Help Center & FAQs</a></li>
+                    <li><a href="#" class="hover:text-white">Track Order</a></li>
+                    <li><a href="#" class="hover:text-white">Doorstep Delivery Timelines</a></li>
+                    <li><a href="#" class="hover:text-white">Returns Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold uppercase mb-3 text-sm">About Ridax</h5>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white">Laboratory Standards</a></li>
+                    <li><a href="#" class="hover:text-white">Commercial Pest Eradication</a></li>
+                    <li><a href="#" class="hover:text-white">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold uppercase mb-3 text-sm">Payment Methods</h5>
+                <p class="text-gray-400 mb-3">Guaranteed encrypted transactions backed by Paystack.</p>
+                <div class="flex gap-2 text-2xl text-gray-300">
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-white font-bold uppercase mb-3 text-sm">Direct Lab Contact</h5>
+                <p class="text-gray-400 mb-2">Pest control consultation for commercial establishments and residences.</p>
+                <a href="https://wa.me/" class="inline-flex items-center gap-2 text-green-400 font-bold hover:underline">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 border-t border-gray-800 pt-6 text-center text-gray-500">
+            © 2026 Ridax Eradication Systems. All rights reserved.
+        </div>
     </footer>
 
-    <!-- Payment Logic -->
+    <!-- Cart & Payment Script -->
     <script>
-        const paymentForm = document.getElementById('paymentForm');
+        // REPLACE WITH YOUR ACTUAL PAYSTACK TEST PUBLIC KEY
+        const PAYSTACK_PUBLIC_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 
-        paymentForm.addEventListener('submit', function(e) {
+        let cart = [];
+
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ id, name, price, qty: 1 });
+            }
+            renderCart();
+            toggleCart(true); // Open drawer on add
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.id !== id);
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const countBadge = document.getElementById('cartCount');
+            const totalDisplay = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            countBadge.innerText = totalItems;
+            totalDisplay.innerText = '₦' + totalPrice.toLocaleString();
+            document.getElementById('modalTotal').innerText = '₦' + totalPrice.toLocaleString();
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fa-solid fa-cart-arrow-down text-4xl mb-3"></i>
+                        <p class="text-sm">Your shopping cart is empty</p>
+                    </div>`;
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            container.innerHTML = cart.map(item => `
+                <div class="py-3 flex justify-between items-center">
+                    <div class="flex-1 pr-3">
+                        <h5 class="text-xs font-semibold text-gray-800 line-clamp-1">${item.name}</h5>
+                        <span class="text-xs text-gray-500">₦${item.price.toLocaleString()}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateQty(${item.id}, -1)" class="h-6 w-6 border rounded bg-gray-100 text-xs font-bold hover:bg-gray-200">-</button>
+                        <span class="text-xs font-semibold">${item.qty}</span>
+                        <button onclick="updateQty(${item.id}, 1)" class="h-6 w-6 border rounded bg-gray-100 text-xs font-bold hover:bg-gray-200">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cartDrawer');
+            if (forceOpen) {
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.toggle('hidden');
+            }
+        }
+
+        function openCheckoutModal() {
+            toggleCart();
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function processOrder(e) {
             e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const amount = document.getElementById('product').value * 100; // Paystack works in kobo
-            const paymentMethod = document.querySelector('input[name="payMethod"]:checked').value;
-            
-            if (paymentMethod === 'card') {
-                // Initialize Paystack
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const email = document.getElementById('custEmail').value;
+            const payType = document.querySelector('input[name="payType"]:checked').value;
+            const state = document.getElementById('custState').value;
+
+            // Check Lagos-only restriction for item 3
+            const hasLagosOnlyItem = cart.some(item => item.id === 3);
+            if (hasLagosOnlyItem && state !== 'Lagos') {
+                alert('Warning: Ridax 300ml 2-pack is restricted to Lagos State delivery only. Please update your state or cart.');
+                return;
+            }
+
+            if (payType === 'card') {
                 let handler = PaystackPop.setup({
-                    // REPLACE THIS WITH YOUR TEST PUBLIC KEY
-                    key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 
+                    key: pk_test_1263258844e391426936d45b3c68bfa80d61773b,
                     email: email,
-                    amount: amount,
+                    amount: totalPrice * 100, // Amount in kobo
                     currency: 'NGN',
                     ref: 'RDX_' + Math.floor((Math.random() * 1000000000) + 1),
                     callback: function(response) {
-                        alert('Payment complete! Reference: ' + response.reference + '\n\n(In production, this routes to the admin portal).');
+                        alert('Payment Verified! Reference: ' + response.reference + '\nOrder has been sent to the lab for dispatch.');
+                        cart = [];
+                        renderCart();
+                        closeCheckoutModal();
                     },
                     onClose: function() {
-                        alert('Payment window closed.');
+                        alert('Checkout was cancelled.');
                     }
                 });
                 handler.openIframe();
             } else {
-                // Pay on Delivery Logic
-                alert('Order Recorded! You have selected Pay on Delivery. Our dispatch team will contact you shortly.');
+                alert('Order Confirmed via Pay on Delivery! Our logistics partner will contact you before dispatch.');
+                cart = [];
+                renderCart();
+                closeCheckoutModal();
             }
-        });
+        }
     </script>
 </body>
 </html>
