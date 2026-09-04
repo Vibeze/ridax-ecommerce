@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - Ridax</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-ridax-green { background-color: #16a34a; }
+        .text-ridax-green { color: #16a34a; }
+        .border-ridax-green { border-color: #16a34a; }
+        .hover-bg-ridax-dark:hover { background-color: #15803d; }
+    </style>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <!-- Logo Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-ridax-green flex items-center justify-center gap-2">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                RIDAX
+            </h1>
+            <p class="text-gray-500 text-sm mt-2">Log in to your account.</p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="space-y-4">
+            
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" id="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="john@example.com">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ridax-green hover-bg-ridax-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-6 transition duration-150">
+                Log In
+            </button>
+        </form>
+
+        <!-- Signup Redirect -->
+        <p class="mt-6 text-center text-sm text-gray-600">
+            Don't have an account? 
+            <a href="signup.html" class="font-medium text-ridax-green hover:text-green-700 transition duration-150">Sign up here</a>
+        </p>
+    </div>
+
+    <!-- Supabase JavaScript Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <script>
+        // REPLACE THESE WITH THE EXACT SAME URL AND KEY FROM SIGNUP.HTML
+        const supabaseUrl = 'YOUR_SUPABASE_PROJECT_URL';
+        const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+        
+        const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+            
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = "Logging In... Please wait.";
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Send login request to Supabase Auth
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email,
+                password: password,
+            });
+
+            if (error) {
+                alert("Error: " + error.message);
+                btn.innerText = originalText;
+                return;
+            }
+
+            // Success! Send them back to the main store to shop
+            window.location.href = "index.html"; 
+        });
+    </script>
+</body>
+</html>
