@@ -3,89 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - Ridax</title>
+    <title>Create Account | Ridax</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ridax: {
+                            DEFAULT: '#1b7a39',
+                            dark: '#135c29',
+                            light: '#e8f3ec',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Ridax Brand Color */
-        .bg-ridax-green { background-color: #16a34a; }
-        .text-ridax-green { color: #16a34a; }
-        .border-ridax-green { border-color: #16a34a; }
-        .hover-bg-ridax-dark:hover { background-color: #15803d; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+<body class="bg-[#f2f2f2] text-gray-800 antialiased min-h-screen flex flex-col">
 
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <!-- Logo Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-ridax-green flex items-center justify-center gap-2">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                RIDAX
-            </h1>
-            <p class="text-gray-500 text-sm mt-2">Create your account to start ordering.</p>
+    <!-- Minimal Header -->
+    <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
+        <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-black text-ridax tracking-tighter flex items-center gap-1">
+                <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
+            </a>
+            <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-ridax flex items-center gap-2 transition">
+                <i class="fa-solid fa-arrow-left"></i> Back to Store
+            </a>
         </div>
+    </header>
 
-        <!-- Signup Form -->
-        <form id="signup-form" class="space-y-4">
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center p-4 py-12">
+        <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-md border border-gray-100">
             
-            <div>
-                <label for="fullName" class="block text-sm font-medium text-gray-700">Full Name</label>
-                <input type="text" id="fullName" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="John Doe">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Create your account</h1>
+                <p class="text-sm text-gray-500">Join Ridax to manage orders and track deliveries.</p>
             </div>
 
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" id="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="john@example.com">
+            <form id="signup-form" class="space-y-5">
+                <div>
+                    <label for="fullName" class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
+                    <input type="text" id="fullName" required class="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none transition" placeholder="John Doe">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
+                    <input type="email" id="email" required class="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none transition" placeholder="john@example.com">
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone Number</label>
+                    <input type="tel" id="phone" required class="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none transition" placeholder="08012345678">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
+                    <input type="password" id="password" required class="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none transition" placeholder="••••••••">
+                    <p class="text-xs text-gray-500 mt-2">Must be at least 6 characters.</p>
+                </div>
+
+                <button type="submit" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md flex items-center justify-center gap-2 mt-2">
+                    Create Account
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                <p class="text-sm text-gray-600">
+                    Already have an account? 
+                    <a href="login.html" class="font-bold text-ridax hover:text-ridax-dark transition">Log in</a>
+                </p>
             </div>
+        </div>
+    </main>
 
-            <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                <input type="tel" id="phone" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="08012345678">
-            </div>
-
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="••••••••">
-                <p class="text-xs text-gray-500 mt-1">Must be at least 6 characters.</p>
-            </div>
-
-            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ridax-green hover-bg-ridax-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-6 transition duration-150">
-                Create Account
-            </button>
-        </form>
-
-        <!-- Login Redirect -->
-        <p class="mt-6 text-center text-sm text-gray-600">
-            Already have an account? 
-            <a href="login.html" class="font-medium text-ridax-green hover:text-green-700 transition duration-150">Log in here</a>
-        </p>
-    </div>
-<!-- Supabase JavaScript Library -->
+    <!-- Supabase JavaScript Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // 1. Connect to your specific database
-        // REPLACE THESE WITH YOUR ACTUAL URL AND 'ANON' KEY
-        const supabaseUrl = https://gvhptxabpbpnabmxnuix.supabase.co/rest/v1/;
+        // Utilizing your provided credentials
+        const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
         const supabaseAnonKey = 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX';
         
         const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
-        // 2. Listen for the user clicking "Create Account"
         document.getElementById('signup-form').addEventListener('submit', async (e) => {
-            e.preventDefault(); // Stops the page from refreshing
+            e.preventDefault(); 
             
             const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "Creating Account... Please wait.";
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Account...';
+            btn.disabled = true;
 
-            // Grab what the user typed
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
 
-            // 3. Send email and password to Supabase Auth
             const { data, error } = await supabase.auth.signUp({
                 email: email,
                 password: password,
@@ -93,27 +115,21 @@
 
             if (error) {
                 alert("Error: " + error.message);
-                btn.innerText = originalText;
+                btn.innerHTML = originalText;
+                btn.disabled = false;
                 return;
             }
 
-            // 4. If signup works, save Name and Phone to our new profiles table
             if (data.user) {
                 const { error: profileError } = await supabase
                     .from('profiles')
-                    .insert([
-                        { 
-                            id: data.user.id, 
-                            full_name: fullName, 
-                            phone: phone 
-                        }
-                    ]);
+                    .insert([{ id: data.user.id, full_name: fullName, phone: phone }]);
 
                 if (profileError) {
                     console.error("Error saving profile:", profileError.message);
                 }
-
-                // 5. Success! Send them back to the main store to shop
+                
+                // Redirect on success
                 window.location.href = "index.html"; 
             }
         });

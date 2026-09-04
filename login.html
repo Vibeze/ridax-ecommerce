@@ -3,59 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - Ridax</title>
+    <title>Log In | Ridax</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ridax: {
+                            DEFAULT: '#1b7a39',
+                            dark: '#135c29',
+                            light: '#e8f3ec',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        .bg-ridax-green { background-color: #16a34a; }
-        .text-ridax-green { color: #16a34a; }
-        .border-ridax-green { border-color: #16a34a; }
-        .hover-bg-ridax-dark:hover { background-color: #15803d; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+<body class="bg-[#f2f2f2] text-gray-800 antialiased min-h-screen flex flex-col">
 
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <!-- Logo Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-ridax-green flex items-center justify-center gap-2">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                RIDAX
-            </h1>
-            <p class="text-gray-500 text-sm mt-2">Log in to your account.</p>
+    <!-- Minimal Header -->
+    <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
+        <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-3xl font-black text-ridax tracking-tighter flex items-center gap-1">
+                <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
+            </a>
+            <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-ridax flex items-center gap-2 transition">
+                <i class="fa-solid fa-arrow-left"></i> Back to Store
+            </a>
         </div>
+    </header>
 
-        <!-- Login Form -->
-        <form id="login-form" class="space-y-4">
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center p-4 py-12">
+        <div class="bg-white p-8 sm:p-10 rounded-lg shadow-lg w-full max-w-md border border-gray-100">
             
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" id="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="john@example.com">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">Welcome back</h1>
+                <p class="text-sm text-gray-500">Log in to your Ridax account.</p>
             </div>
 
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-ridax-green focus:border-ridax-green shadow-sm text-sm" placeholder="••••••••">
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label for="email" class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
+                    <input type="email" id="email" required class="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none transition" placeholder="john@example.com">
+                </div>
+
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label for="password" class="block text-xs font-bold text-gray-700 uppercase">Password</label>
+                        <a href="#" class="text-xs font-medium text-ridax hover:text-ridax-dark transition">Forgot Password?</a>
+                    </div>
+                    <input type="password" id="password" required class="w-full border border-gray-300 rounded-md px-4 py-2.5 text-sm focus:border-ridax focus:ring-1 focus:ring-ridax outline-none transition" placeholder="••••••••">
+                </div>
+
+                <button type="submit" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md flex items-center justify-center gap-2 mt-2">
+                    <i class="fa-solid fa-lock"></i> Log In
+                </button>
+            </form>
+
+            <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+                <p class="text-sm text-gray-600">
+                    Don't have an account? 
+                    <a href="signup.html" class="font-bold text-ridax hover:text-ridax-dark transition">Sign up now</a>
+                </p>
             </div>
-
-            <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ridax-green hover-bg-ridax-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-6 transition duration-150">
-                Log In
-            </button>
-        </form>
-
-        <!-- Signup Redirect -->
-        <p class="mt-6 text-center text-sm text-gray-600">
-            Don't have an account? 
-            <a href="signup.html" class="font-medium text-ridax-green hover:text-green-700 transition duration-150">Sign up here</a>
-        </p>
-    </div>
+        </div>
+    </main>
 
     <!-- Supabase JavaScript Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
-        // REPLACE THESE WITH THE EXACT SAME URL AND KEY FROM SIGNUP.HTML
-        const supabaseUrl = 'YOUR_SUPABASE_PROJECT_URL';
-        const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+        const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
+        const supabaseAnonKey = 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX';
         
         const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
@@ -63,13 +90,13 @@
             e.preventDefault(); 
             
             const btn = e.target.querySelector('button');
-            const originalText = btn.innerText;
-            btn.innerText = "Logging In... Please wait.";
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Logging In...';
+            btn.disabled = true;
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Send login request to Supabase Auth
             const { data, error } = await supabase.auth.signInWithPassword({
                 email: email,
                 password: password,
@@ -77,11 +104,12 @@
 
             if (error) {
                 alert("Error: " + error.message);
-                btn.innerText = originalText;
+                btn.innerHTML = originalText;
+                btn.disabled = false;
                 return;
             }
 
-            // Success! Send them back to the main store to shop
+            // Redirect on success
             window.location.href = "index.html"; 
         });
     </script>
