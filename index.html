@@ -421,16 +421,200 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- 🧠 CORE SYSTEM SCRIPT (Unified Engine) -->
+   <!-- ========================================== -->
+    <!-- 🧠 CORE SYSTEM SCRIPT (Bulletproof Engine) -->
     <!-- ========================================== -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // ----------------------------------------------------
-        // 1. SUPABASE INITIALIZATION
-        // ----------------------------------------------------
         const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
         const supabaseAnonKey = 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX';
         const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+        // 1. TRACK USER INSTANTLY (No network hangs on button click)
+        let currentUser = null; 
+
+        async function checkAuthState() {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                if (user) {
+                    currentUser = user; 
+                    const { data: profile } = await supabase
+                        .from('profiles').select('full_name').eq('id', user.id).single();
+
+                    if (profile && profile.full_name) {
+                        const firstName = profile.full_name.split(' ')[0];
+                        const authBtn = document.getElementById('auth-btn');
+                        document.getElementById('auth-text').innerText = 'Hi, ' + firstName;
+                        authBtn.href = 'dashboard.html'; 
+                        authBtn.classList.add('text-ridax', 'font-bold');
+                    }
+                }
+            } catch (err) {
+                console.error("Auth check failed on load", err);
+            }
+        }
+        checkAuthState();
+
+        // 2. CART LOGIC
+        let cart = [];
+
+        function addToCart(id, name, price) {
+            const existing = cart.find(item => item.id === id);
+            if (existing) existing.qty++;
+            else cart.push({ id, name, price, qty: 1 });
+            renderCart();
+            toggleCart(true);
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cartItems');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const formattedTotal = '₦' + totalPrice.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            document.getElementById('cartCount').innerText = totalItems;
+            document.getElementById('cartTotal').innerText = formattedTotal;
+            
+            // Failsafe for modal total if it exists
+            const modalTotal = document.getElementById('modalTotal');
+            if (modalTotal) modalTotal.innerText = formattedTotal;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-gray-400">Your cart is empty.</div>`;
+                checkoutBtn.disabled = true;
+                return;
+            }
+
+            checkoutBtn.disabled = false;
+            container.innerHTML = cart.map(item => `
+                <div class="py-4 flex justify-between items-center border-b border-gray-50">
+                    <div class="flex-1 pr-4">
+                        <h5 class="text-sm font-semibold">${item.name}</h5>
+                        <span class="text-sm font-bold text-ridax mt-1 block">₦${item.price.toLocaleString()}</span>
+                    </div>
+                    <div class="flex items-center gap-3 bg-gray-50 p-1 rounded">
+                        <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">-</button>
+                        <span class="text-sm font-bold w-4 text-center">${item.qty}</span>
+                        <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart(forceOpen = false) {
+            const drawer = document.getElementById('cartDrawer');
+            if (forceOpen) drawer.classList.remove('hidden');
+            else drawer.classList.toggle('hidden');
+        }
+
+        // 3. INSTANT AUTH GATE (Guaranteed not to freeze)
+        function handleCheckoutClick() {
+            if (!currentUser) {
+                alert("Please log in or create an account to secure your order.");
+                window.location.href = "login.html";
+                return;
+            }
+            openCheckoutModal();
+        }
+
+        function openCheckoutModal() {
+            toggleCart();
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        // 4. BULLETPROOF ORDER PROCESSING
+        async function processOrder(e) {
+            if (e) e.preventDefault(); 
+            
+            // Safe button selection that won't crash
+            const payBtn = document.getElementById('paySubmitBtn') || document.querySelector('#orderForm button');
+            const originalBtnHtml = payBtn.innerHTML;
+            payBtn.innerHTML = 'Processing...';
+            payBtn.disabled = true;
+
+            try {
+                const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                
+                // Safe element grabbing
+                const name = document.getElementById('custName')?.value.trim();
+                const email = document.getElementById('custEmail')?.value.trim();
+                const phone = document.getElementById('custPhone')?.value.trim();
+                const city = document.getElementById('custCity')?.value.trim() || '';
+                const address = document.getElementById('custAddress')?.value.trim();
+                const state = document.getElementById('custState')?.value || 'Lagos';
+
+                if (!name || !email || !phone || !address) {
+                    alert("Please fill in ALL delivery details.");
+                    payBtn.innerHTML = originalBtnHtml;
+                    payBtn.disabled = false;
+                    return;
+                }
+
+                if (cart.some(item => item.id === 3) && state !== 'Lagos') {
+                    alert('Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.');
+                    payBtn.innerHTML = originalBtnHtml;
+                    payBtn.disabled = false;
+                    return;
+                }
+
+                const payType = document.querySelector('input[name="payType"]:checked').value;
+                const fullAddress = city ? `${address}, ${city}` : address;
+
+                const saveOrderToDatabase = async (reference) => {
+                    const { error } = await supabase.from('orders').insert([{
+                        customer_name: name, customer_email: email, customer_phone: phone,
+                        delivery_address: fullAddress, state: state, total_amount: totalPrice,
+                        cart_items: cart, payment_reference: reference, status: 'pending'
+                    }]);
+                    if (error) throw error;
+                };
+
+                if (payType === 'card') {
+                    let handler = PaystackPop.setup({
+                        key: 'pk_test_1263258844c391426936d45b3c68bfa80d61773b',
+                        email: email,
+                        amount: totalPrice * 100, 
+                        currency: 'NGN',
+                        ref: 'RDX_' + Math.floor((Math.random() * 1000000000) + 1),
+                        callback: async function(response) {
+                            await saveOrderToDatabase(response.reference);
+                            alert('Payment Successful! Reference: ' + response.reference);
+                            cart = []; renderCart(); closeCheckoutModal();
+                            payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false;
+                        },
+                        onClose: function() {
+                            alert('Checkout was cancelled.');
+                            payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false;
+                        }
+                    });
+                    handler.openIframe();
+                } else {
+                    const podRef = 'POD_' + Math.floor(Math.random() * 1000000000);
+                    await saveOrderToDatabase(podRef);
+                    alert('Order Confirmed (Pay on Delivery). Our dispatch team will call you shortly.');
+                    cart = []; renderCart(); closeCheckoutModal();
+                    payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false;
+                }
+            } catch (err) {
+                console.error("Order process error:", err);
+                alert("There was an error processing your order. Please check the console or try again.");
+                payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false;
+            }
+        }
+    </script>
 
         // ----------------------------------------------------
         // 2. AUTH STATE LISTENER (Runs on page load)
