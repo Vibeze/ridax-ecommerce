@@ -12,11 +12,7 @@
     <script>
         tailwind.config = {
             theme: {
-                extend: {
-                    colors: {
-                        ridax: { DEFAULT: '#1b7a39', dark: '#135c29', light: '#e8f3ec', accent: '#f68b1e' }
-                    }
-                }
+                extend: { colors: { ridax: { DEFAULT: '#1b7a39', dark: '#135c29', light: '#e8f3ec', accent: '#f68b1e' } } }
             }
         }
     </script>
@@ -27,28 +23,26 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-[#f2f2f2] text-gray-800 antialiased">
+<body class="bg-[#f2f2f2] text-gray-800 antialiased relative">
 
-    <!-- TOP NOTIFICATION BAR -->
+    <!-- PREMIUM TOAST NOTIFICATION CONTAINER (NO MORE UGLY ALERTS) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
+
     <div class="bg-green-900 text-white text-[11px] py-2 px-4 text-center tracking-wide font-medium">
         To order, WhatsApp/Call: <span class="font-bold">0800-RIDAX-NG</span>. DO NOT MAKE PAYMENTS INTO ANY PERSONAL ACCOUNT!!!
     </div>
 
-    <!-- HEADER & NAVIGATION -->
     <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
         <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between gap-6">
-            
             <a href="#" class="text-3xl font-black text-ridax tracking-tighter flex items-center gap-1 shrink-0">
                 <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
             </a>
-
             <div class="flex-1 max-w-3xl hidden lg:flex">
                 <div class="relative w-full flex border-2 border-ridax rounded-md overflow-hidden">
                     <input type="text" placeholder="Search for pesticides, roach powder, bulk packs..." class="w-full pl-4 pr-4 py-2.5 outline-none text-sm">
                     <button class="bg-ridax text-white px-6 py-2.5 transition hover:bg-ridax-dark"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
                 </div>
             </div>
-
             <div class="flex items-center gap-6 shrink-0">
                 <div class="hidden xl:flex items-center gap-2">
                     <i class="fa-brands fa-whatsapp text-3xl text-green-500"></i>
@@ -57,12 +51,10 @@
                         <div class="font-bold text-gray-900">+234 800 000 0000</div>
                     </div>
                 </div>
-
                 <a href="login.html" id="auth-btn" class="flex items-center gap-2 text-sm font-medium hover:text-ridax cursor-pointer transition">
                     <i class="fa-regular fa-user text-xl"></i>
                     <span id="auth-text" class="hidden md:inline">Account</span>
                 </a>
-
                 <button onclick="window.toggleCart()" class="flex items-center gap-2 font-medium hover:text-ridax relative bg-ridax-light px-3 py-2 rounded-md">
                     <div class="relative">
                         <i class="fa-solid fa-cart-shopping text-xl text-ridax"></i>
@@ -72,7 +64,6 @@
                 </button>
             </div>
         </div>
-        
         <div class="bg-ridax text-white hidden md:block">
             <div class="max-w-[1400px] mx-auto px-4 flex gap-6 text-sm font-medium">
                 <a href="#" class="py-2.5 hover:text-green-200"><i class="fa-solid fa-bars mr-2"></i> All Categories</a>
@@ -84,10 +75,9 @@
         </div>
     </header>
 
-    <!-- MAIN PRODUCT GRID -->
     <main class="max-w-[1400px] mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
         <aside class="w-full md:w-64 shrink-0 hidden md:block">
-            <div class="bg-white p-4 rounded-md shadow-sm mb-4 border border-gray-100">
+            <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 mb-4">
                 <h4 class="font-bold text-gray-800 mb-3 text-sm uppercase">Search Products</h4>
                 <div class="relative w-full">
                     <input type="text" placeholder="Search..." class="w-full pl-3 pr-8 py-2 border border-gray-200 rounded text-sm focus:border-ridax outline-none">
@@ -117,20 +107,16 @@
 
             <div class="flex justify-between items-center mb-4">
                 <h1 class="text-xl font-bold text-gray-800">Insecticides</h1>
-                <span class="text-sm text-gray-500 hidden sm:inline">Showing all 4 results</span>
             </div>
 
+            <!-- PREMIUM UI GRID -->
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
-                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
-                        <i class="fa-solid fa-spray-can text-5xl text-gray-300 group-hover:text-ridax transition"></i>
-                    </div>
+                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-spray-can text-5xl text-gray-300 group-hover:text-ridax transition"></i></div>
                     <div class="flex-1 flex flex-col">
                         <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Pest Spray (500ml) - Pack of 2</h3>
-                        <div class="text-yellow-400 text-xs mt-1 mb-2">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
-                        </div>
+                        <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
                         <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦20,000.00</span></div>
                     </div>
                     <button onclick="window.addToCart(1, 'Ridax Pest Spray (500ml) - 2 Pack', 20000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
@@ -144,9 +130,7 @@
                     </div>
                     <div class="flex-1 flex flex-col">
                         <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Pest Spray (500ml) - Pack of 4</h3>
-                        <div class="text-yellow-400 text-xs mt-1 mb-2">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
+                        <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
                         <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦34,000.00</span></div>
                     </div>
                     <button onclick="window.addToCart(2, 'Ridax Pest Spray (500ml) - 4 Pack', 34000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
@@ -155,14 +139,10 @@
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">LAGOS ONLY</span>
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
-                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
-                        <i class="fa-solid fa-bottle-droplet text-5xl text-gray-300 group-hover:text-ridax transition"></i>
-                    </div>
+                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-bottle-droplet text-5xl text-gray-300 group-hover:text-ridax transition"></i></div>
                     <div class="flex-1 flex flex-col">
                         <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Pest Spray (300ml) - Pack of 2</h3>
-                        <div class="text-yellow-400 text-xs mt-1 mb-2">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i>
-                        </div>
+                        <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
                         <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦18,000.00</span></div>
                     </div>
                     <button onclick="window.addToCart(3, 'Ridax Pest Spray (300ml) - 2 Pack', 18000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
@@ -170,14 +150,10 @@
 
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
-                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
-                        <i class="fa-solid fa-box-archive text-5xl text-gray-300 group-hover:text-ridax transition"></i>
-                    </div>
+                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-box-archive text-5xl text-gray-300 group-hover:text-ridax transition"></i></div>
                     <div class="flex-1 flex flex-col">
                         <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Cockroach Powder (100g)</h3>
-                        <div class="text-yellow-400 text-xs mt-1 mb-2">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-                        </div>
+                        <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
                         <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦12,000.00</span></div>
                     </div>
                     <button onclick="window.addToCart(4, 'Ridax Cockroach Powder', 12000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
@@ -186,6 +162,7 @@
         </div>
     </main>
 
+    <!-- FOOTER SECTION -->
     <section class="bg-black text-white py-10 mt-12 border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex gap-4">
@@ -240,9 +217,7 @@
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="window.toggleCart()"></div>
         <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col z-10 transform transition-transform duration-300">
             <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                <h3 class="font-bold text-gray-800 flex items-center gap-2">
-                    <i class="fa-solid fa-cart-shopping text-ridax"></i> Shopping Cart
-                </h3>
+                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-ridax"></i> Shopping Cart</h3>
                 <button onclick="window.toggleCart()" class="text-gray-400 hover:text-gray-800 text-xl font-bold">✕</button>
             </div>
             <div id="cartItems" class="flex-1 overflow-y-auto p-4 divide-y divide-gray-100"></div>
@@ -258,7 +233,7 @@
         </div>
     </div>
 
-    <!-- PREMIUM CUSTOM AUTH MODAL (Replaces the ugly browser alert) -->
+    <!-- PREMIUM AUTH MODAL -->
     <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeAuthModal()"></div>
         <div class="relative bg-white rounded-lg max-w-sm w-full p-8 shadow-2xl z-10 text-center transform transition-all">
@@ -266,19 +241,15 @@
                 <i class="fa-solid fa-user-lock text-3xl text-ridax"></i>
             </div>
             <h3 class="font-black text-xl text-gray-900 mb-2">Sign In Required</h3>
-            <p class="text-sm text-gray-500 mb-6 leading-relaxed">To securely process your order and track your delivery, please log in or create a free Ridax account.</p>
+            <p class="text-sm text-gray-500 mb-6 leading-relaxed">To securely process your order and track your delivery, please log in or create a free account.</p>
             <div class="space-y-3">
-                <a href="login.html" class="block w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md">
-                    Log In / Sign Up
-                </a>
-                <button onclick="window.closeAuthModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded text-sm uppercase transition">
-                    Cancel
-                </button>
+                <a href="login.html" class="block w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md">Log In / Sign Up</a>
+                <button onclick="window.closeAuthModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded text-sm uppercase transition">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL FORM -->
+    <!-- CHECKOUT MODAL FORM (DYNAMIC STATES VERSION) -->
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeCheckoutModal()"></div>
         <div class="relative bg-white rounded-lg max-w-lg w-full p-6 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
@@ -303,20 +274,19 @@
                         </div>
                     </div>
                     
+                    <!-- DYNAMIC DROPDOWNS -->
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
-                            <select id="custState" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
-                                <option value="Lagos">Lagos State</option>
-                                <option value="Abuja">Abuja (FCT)</option>
-                                <option value="Ogun">Ogun State</option>
-                                <option value="Rivers">Rivers State</option>
-                                <option value="Other">Other States</option>
+                            <select id="custState" onchange="window.updateCities()" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none bg-white">
+                                <option value="">Select State</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">City / L.G.A</label>
-                            <input type="text" id="custCity" placeholder="e.g. Amuwo-Odofin" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <select id="custCity" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none bg-white disabled:bg-gray-100" disabled>
+                                <option value="">Select City / L.G.A</option>
+                            </select>
                         </div>
                     </div>
                     <div>
@@ -347,19 +317,95 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT ENGINE -->
+    <!-- MAIN JAVASCRIPT ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // PREMIUM TOAST UI SYSTEM (ANTI-SPAM)
+        window.showToast = function(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            
+            const existingToasts = container.querySelectorAll('span');
+            for (let t of existingToasts) {
+                if (t.innerText === message) return;
+            }
+
+            const toast = document.createElement('div');
+            const bgColor = type === 'error' ? 'bg-red-600' : 'bg-green-600';
+            const icon = type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check';
+            
+            toast.className = `${bgColor} text-white px-5 py-3.5 rounded shadow-2xl transform transition-all duration-300 translate-x-full opacity-0 flex items-center gap-3 border-l-4 border-white/30`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i><span class="text-sm font-bold tracking-wide">${message}</span>`;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => toast.classList.remove('translate-x-full', 'opacity-0'), 10);
+            setTimeout(() => {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4500);
+        };
+
+        // NIGERIAN STATES & LGAS DICTIONARY
+        const naijaLocations = {
+            "Abia": ["Aba North","Aba South","Arochukwu","Bende","Ikwuano","Isiala Ngwa North","Isiala Ngwa South","Isuikwuato","Obi Ngwa","Ohafia","Osisioma","Ugwunagbo","Ukwa East","Ukwa West","Umuahia North","Umuahia South","Umu Nneochi"],
+            "Abuja (FCT)": ["Abaji","Bwari","Gwagwalada","Kuje","Kwali","Municipal Area Council"],
+            "Anambra": ["Aguata","Anambra East","Anambra West","Anaocha","Awka North","Awka South","Ayamelum","Dunukofia","Ekwusigo","Idemili North","Idemili South","Ihiala","Njikoka","Nnewi North","Nnewi South","Ogbaru","Onitsha North","Onitsha South","Orumba North","Orumba South","Oyi"],
+            "Delta": ["Aniocha North","Aniocha South","Bomadi","Burutu","Ethiope East","Ethiope West","Ika North East","Ika South","Isoko North","Isoko South","Ndokwa East","Ndokwa West","Okpe","Oshimili North","Oshimili South","Patani","Sapele","Udu","Ughelli North","Ughelli South","Ukwuani","Uvwie","Warri North","Warri South","Warri South West"],
+            "Edo": ["Akoko-Edo","Egor","Esan Central","Esan North-East","Esan South-East","Esan West","Etsako Central","Etsako East","Etsako West","Igueben","Ikpoba Okha","Orhionmwon","Oredo","Ovia North-East","Ovia South-West","Owan East","Owan West","Uhunmwonde"],
+            "Enugu": ["Aninri","Awgu","Enugu East","Enugu North","Enugu South","Ezeagu","Igbo Etiti","Igbo Eze North","Igbo Eze South","Isi Uzo","Nkanu East","Nkanu West","Nsukka","Oji River","Udenu","Udi","Uzo Uwani"],
+            "Kaduna": ["Birnin Gwari","Chikun","Giwa","Igabi","Ikara","Jaba","Jema'a","Kachia","Kaduna North","Kaduna South","Kagarko","Kajuru","Kaura","Kauru","Kubau","Kudan","Lere","Makarfi","Sabon Gari","Sanga","Soba","Zangon Kataf","Zaria"],
+            "Kano": ["Ajingi","Albasu","Bagwai","Bebeji","Bichi","Bunkure","Dala","Dambatta","Dawakin Kudu","Dawakin Tofa","Doguwa","Fagge","Gabasawa","Garko","Garun Mallam","Gaya","Gezawa","Gwale","Gwarzo","Kabo","Kano Municipal","Karaye","Kibiya","Kiru","Kumbotso","Kunchi","Kura","Madobi","Makoda","Minjibir","Nasarawa","Rano","Rimin Gado","Rogo","Shanono","Sumaila","Takai","Tarauni","Tofa","Tsanyawa","Tudun Wada","Ungogo","Warawa","Wudil"],
+            "Lagos": ["Agege","Ajeromi-Ifelodun","Alimosho","Amuwo-Odofin","Apapa","Badagry","Epe","Eti-Osa","Ibeju-Lekki","Ifako-Ijaiye","Ikeja","Ikorodu","Kosofe","Lagos Island","Lagos Mainland","Mushin","Ojo","Oshodi-Isolo","Shomolu","Surulere"],
+            "Ogun": ["Abeokuta North","Abeokuta South","Ado-Odo/Ota","Egbado North","Egbado South","Ewekoro","Ifo","Ijebu East","Ijebu North","Ijebu North East","Ijebu Ode","Ikenne","Imeko Afon","Ipokia","Obafemi Owode","Odeda","Odogbolu","Ogun Waterside","Remo North","Shagamu"],
+            "Oyo": ["Afijio","Akinyele","Atiba","Atisbo","Egbeda","Ibadan North","Ibadan North-East","Ibadan North-West","Ibadan South-East","Ibadan South-West","Ibarapa Central","Ibarapa East","Ibarapa North","Ido","Irepo","Iseyin","Itesiwaju","Iwajowa","Kajola","Lagelu","Ogbomosho North","Ogbomosho South","Ogo Oluwa","Olorunsogo","Oluyole","Ona Ara","Orelope","Ori Ire","Oyo","Oyo East","Saki East","Saki West","Surulere"],
+            "Rivers": ["Abua/Odual","Ahoada East","Ahoada West","Akuku-Toru","Andoni","Asari-Toru","Bonny","Degema","Eleme","Emuoha","Etche","Gokana","Ikwerre","Khana","Obio/Akpor","Ogba/Egbema/Ndoni","Ogu/Bolo","Okrika","Omuma","Opobo/Nkoro","Oyigbo","Port Harcourt","Tai"],
+            "Other States": ["Please specify in precise address..."]
+        };
+
+        // POPULATE STATES ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            const stateSelect = document.getElementById('custState');
+            if(stateSelect) {
+                Object.keys(naijaLocations).forEach(state => {
+                    const option = document.createElement('option');
+                    option.value = state;
+                    option.textContent = state;
+                    stateSelect.appendChild(option);
+                });
+            }
+        });
+
+        // UPDATE CITIES DYNAMICALLY
+        window.updateCities = function() {
+            const stateSelect = document.getElementById('custState');
+            const citySelect = document.getElementById('custCity');
+            const selectedState = stateSelect.value;
+            
+            citySelect.innerHTML = '<option value="">Select City / L.G.A</option>';
+            
+            if (selectedState && naijaLocations[selectedState]) {
+                citySelect.disabled = false;
+                citySelect.classList.remove('bg-gray-100');
+                naijaLocations[selectedState].forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    citySelect.appendChild(option);
+                });
+            } else {
+                citySelect.disabled = true;
+                citySelect.classList.add('bg-gray-100');
+            }
+        };
+
+        // SYSTEM GLOBALS
         let appCart = [];
         let dbClient = null;
         let activeUser = null;
 
         try {
             if (window.supabase) {
-                dbClient = window.supabase.createClient(
-                    'https://gvhptxabpbpnabmxnuix.supabase.co', 
-                    'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX'
-                );
+                dbClient = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
             }
         } catch(e) { console.warn("Supabase init blocked:", e); }
 
@@ -381,10 +427,9 @@
                         }
                     }
                 }
-            } catch(e) { console.warn("Auth check failed:", e); }
+            } catch(e) {}
         };
-
-        window.onload = window.checkAuthState;
+        window.addEventListener('load', window.checkAuthState);
 
         window.addToCart = function(id, name, price) {
             const existing = appCart.find(item => item.id === id);
@@ -392,6 +437,7 @@
             else appCart.push({ id, name, price, qty: 1 });
             window.renderCart();
             window.toggleCart(true);
+            window.showToast(`${name} added to cart!`);
         };
 
         window.updateQty = function(id, delta) {
@@ -445,12 +491,11 @@
             else drawer.classList.toggle('hidden');
         };
 
-        // NEW: Premium UI Trigger
         window.handleCheckoutClick = function() {
             if (!activeUser) {
-                window.toggleCart(false); // Hide the cart
+                window.toggleCart(false); 
                 const authModal = document.getElementById('authModal');
-                if (authModal) authModal.classList.remove('hidden'); // Show premium UI box
+                if (authModal) authModal.classList.remove('hidden'); 
                 return;
             }
             window.openCheckoutModal();
@@ -472,9 +517,7 @@
             if (modal) modal.classList.add('hidden');
         };
 
-        window.processOrder = async function(e) {
-            if (e) e.preventDefault(); 
-            
+        window.processOrder = async function() {
             const payBtn = document.getElementById('paySubmitBtn');
             const originalBtnHtml = payBtn ? payBtn.innerHTML : 'Pay';
             
@@ -485,22 +528,21 @@
 
             try {
                 const totalPrice = appCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                
                 const name = document.getElementById('custName')?.value.trim();
                 const email = document.getElementById('custEmail')?.value.trim();
                 const phone = document.getElementById('custPhone')?.value.trim();
-                const city = document.getElementById('custCity')?.value.trim();
+                const city = document.getElementById('custCity')?.value;
                 const address = document.getElementById('custAddress')?.value.trim();
                 const state = document.getElementById('custState')?.value;
 
-                if (!name || !email || !phone || !address || !city) {
-                    alert("Please fill in ALL delivery details.");
+                if (!name || !email || !phone || !address || !city || !state) {
+                    window.showToast("Please fill in ALL delivery details.", "error");
                     if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                     return;
                 }
 
                 if (appCart.some(item => item.id === 3) && state !== 'Lagos') {
-                    alert('Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.');
+                    window.showToast("Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.", "error");
                     if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                     return;
                 }
@@ -509,6 +551,12 @@
                 const payType = payTypeElement ? payTypeElement.value : 'pod';
                 const fullAddress = `${address}, ${city}`;
 
+                if (payType === 'card' && typeof PaystackPop === 'undefined') {
+                    window.showToast("Payment gateway blocked. Please disable your browser's Tracking Protection.", "error");
+                    if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
+                    return;
+                }
+
                 const saveOrderToDatabase = async (reference) => {
                     if (!dbClient) throw new Error("Database unavailable");
                     const { error } = await dbClient.from('orders').insert([{
@@ -516,11 +564,10 @@
                         delivery_address: fullAddress, state: state, total_amount: totalPrice,
                         cart_items: appCart, payment_reference: reference, status: 'pending'
                     }]);
-                    if (error) throw error;
+                    if (error) throw new Error(error.message || "Database insert failed");
                 };
 
                 if (payType === 'card') {
-                    if (!window.PaystackPop) throw new Error("Payment gateway blocked");
                     let handler = window.PaystackPop.setup({
                         key: 'pk_test_1263258844c391426936d45b3c68bfa80d61773b',
                         email: email,
@@ -528,13 +575,17 @@
                         currency: 'NGN',
                         ref: 'RDX_' + Math.floor((Math.random() * 1000000000) + 1),
                         callback: async function(response) {
-                            await saveOrderToDatabase(response.reference);
-                            alert('Payment Successful! Reference: ' + response.reference);
-                            appCart = []; window.renderCart(); window.closeCheckoutModal();
+                            try {
+                                await saveOrderToDatabase(response.reference);
+                                window.showToast('Payment Successful! Order logged.');
+                                appCart = []; window.renderCart(); window.closeCheckoutModal();
+                            } catch (dbErr) {
+                                window.showToast('Payment successful, but failed to save order to database.', 'error');
+                            }
                             if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                         },
                         onClose: function() {
-                            alert('Checkout was cancelled.');
+                            window.showToast('Checkout was cancelled.', 'error');
                             if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                         }
                     });
@@ -542,13 +593,13 @@
                 } else {
                     const podRef = 'POD_' + Math.floor(Math.random() * 1000000000);
                     await saveOrderToDatabase(podRef);
-                    alert('Order Confirmed (Pay on Delivery). Our dispatch team will call you shortly.');
+                    window.showToast('Order Confirmed (Pay on Delivery).');
                     appCart = []; window.renderCart(); window.closeCheckoutModal();
                     if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                 }
             } catch (err) {
-                console.error("Order process error:", err);
-                alert("There was an error processing your order. Please check the console or try again.");
+                console.error("Order error:", err);
+                window.showToast("Database error: " + err.message, "error");
                 if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
             }
         };
