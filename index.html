@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ridax | Premium Pesticide Marketplace</title>
+    
+    <!-- ========================================== -->
+    <!-- 🎨 EXTERNAL LIBRARIES (Tailwind, FontAwesome, Paystack) -->
+    <!-- ========================================== -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -32,10 +37,16 @@
 </head>
 <body class="bg-[#f2f2f2] text-gray-800 antialiased">
 
+    <!-- ========================================== -->
+    <!-- 🔝 TOP NOTIFICATION BAR -->
+    <!-- ========================================== -->
     <div class="bg-green-900 text-white text-[11px] py-2 px-4 text-center tracking-wide font-medium">
         To order, WhatsApp/Call: <span class="font-bold">0800-RIDAX-NG</span>. DO NOT MAKE PAYMENTS INTO ANY PERSONAL ACCOUNT!!!
     </div>
 
+    <!-- ========================================== -->
+    <!-- 🏠 HEADER & NAVIGATION -->
+    <!-- ========================================== -->
     <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
         <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between gap-6">
             
@@ -62,7 +73,7 @@
                     </div>
                 </div>
 
-                <!-- Updated Account Button with IDs for JavaScript -->
+                <!-- AUTH BUTTON: JavaScript changes this when logged in -->
                 <a href="login.html" id="auth-btn" class="flex items-center gap-2 text-sm font-medium hover:text-ridax cursor-pointer transition">
                     <i class="fa-regular fa-user text-xl"></i>
                     <span id="auth-text" class="hidden md:inline">Account</span>
@@ -89,6 +100,9 @@
         </div>
     </header>
 
+    <!-- ========================================== -->
+    <!-- 🛍️ MAIN PRODUCT GRID -->
+    <!-- ========================================== -->
     <main class="max-w-[1400px] mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
         
         <aside class="w-full md:w-64 shrink-0 hidden md:block">
@@ -112,7 +126,6 @@
         </aside>
 
         <div class="flex-1">
-            
             <div class="bg-gradient-to-r from-green-100 to-white border border-green-200 rounded-md p-6 mb-6 flex flex-col sm:flex-row items-center justify-between shadow-sm relative overflow-hidden">
                 <div class="relative z-10">
                     <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded uppercase shadow-sm">Free Shipping</span>
@@ -213,6 +226,9 @@
         </div>
     </main>
 
+    <!-- ========================================== -->
+    <!-- 📄 FOOTER SECTION -->
+    <!-- ========================================== -->
     <section class="bg-black text-white py-10 mt-12 border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex gap-4">
@@ -298,10 +314,17 @@
         </div>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- 🟢 FLOATING WHATSAPP BUTTON -->
+    <!-- ========================================== -->
     <a href="https://wa.me/" target="_blank" class="fixed bottom-6 right-6 z-40 bg-green-500 text-white p-3 rounded-full shadow-xl hover:bg-green-600 transition flex items-center justify-center h-14 w-14">
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
+
+    <!-- ========================================== -->
+    <!-- 🛒 SHOPPING CART DRAWER (Hidden by default) -->
+    <!-- ========================================== -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleCart()"></div>
         <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col z-10 transform transition-transform duration-300">
@@ -324,6 +347,10 @@
         </div>
     </div>
 
+
+    <!-- ========================================== -->
+    <!-- 💳 CHECKOUT MODAL FORM (Hidden by default) -->
+    <!-- ========================================== -->
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
         <div class="relative bg-white rounded-lg max-w-lg w-full p-6 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
@@ -384,7 +411,10 @@
         </div>
     </div>
 
-    <!-- Supabase JavaScript Library for User Intelligence -->
+
+    <!-- ========================================== -->
+    <!-- 🧠 SUPABASE AUTHENTICATION SCRIPT -->
+    <!-- ========================================== -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
         const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
@@ -412,11 +442,13 @@
                 }
             }
         }
-        
         checkAuthState();
     </script>
 
-    <!-- Shopping Cart and Paystack Logic -->
+
+    <!-- ========================================== -->
+    <!-- ⚙️ CORE JAVASCRIPT LOGIC (Cart & Checkout) -->
+    <!-- ========================================== -->
     <script>
         let cart = [];
 
@@ -498,11 +530,17 @@
             document.getElementById('checkoutModal').classList.add('hidden');
         }
 
-        function processOrder(e) {
+        // =================================================================
+        // THE UPDATED DATABASE CONNECTION LOGIC
+        // =================================================================
+        async function processOrder(e) {
             e.preventDefault();
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            const name = document.getElementById('custName').value;
             const email = document.getElementById('custEmail').value;
-            const payType = document.querySelector('input[name="payType"]:checked').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
             const state = document.getElementById('custState').value;
 
             const hasLagosOnlyItem = cart.some(item => item.id === 3);
@@ -511,6 +549,30 @@
                 return;
             }
 
+            const payType = document.querySelector('input[name="payType"]:checked').value;
+
+            // Sends data to Supabase exactly matching your table columns
+            const saveOrderToDatabase = async (reference, paymentMethod) => {
+                const { error } = await supabase
+                    .from('orders')
+                    .insert([{
+                        customer_name: name,
+                        customer_email: email,       
+                        customer_phone: phone,
+                        delivery_address: address,   
+                        state: state,                
+                        total_amount: totalPrice,
+                        cart_items: cart, 
+                        payment_reference: reference,
+                        status: 'pending'
+                    }]);
+                
+                if (error) {
+                    console.error("Database Error:", error.message);
+                    alert("Order processed, but there was an issue saving to the database.");
+                }
+            };
+
             if (payType === 'card') {
                 let handler = PaystackPop.setup({
                     key: 'pk_test_1263258844c391426936d45b3c68bfa80d61773b',
@@ -518,7 +580,9 @@
                     amount: totalPrice * 100, 
                     currency: 'NGN',
                     ref: 'RDX_' + Math.floor((Math.random() * 1000000000) + 1),
-                    callback: function(response) {
+                    callback: async function(response) {
+                        await saveOrderToDatabase(response.reference, 'Paystack');
+                        
                         alert('Payment Successful! Reference: ' + response.reference + '\nOrder has been placed.');
                         cart = [];
                         renderCart();
@@ -530,6 +594,9 @@
                 });
                 handler.openIframe();
             } else {
+                const podRef = 'POD_' + Math.floor((Math.random() * 1000000000) + 1);
+                await saveOrderToDatabase(podRef, 'Pay on Delivery');
+                
                 alert('Order Confirmed (Pay on Delivery). Our dispatch team will call you shortly.');
                 cart = [];
                 renderCart();
