@@ -340,7 +340,8 @@
                     <span class="text-sm font-medium text-gray-600">Total:</span>
                     <span id="cartTotal" class="text-2xl font-black text-ridax">₦0.00</span>
                 </div>
-                <button onclick="openCheckoutModal()" id="checkoutBtn" disabled class="w-full bg-ridax hover:bg-ridax-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
+                <!-- 🚨 THE UPDATED CHECKOUT BUTTON TRIGGER -->
+                <button onclick="handleCheckoutClick()" id="checkoutBtn" disabled class="w-full bg-ridax hover:bg-ridax-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
                     Checkout Now
                 </button>
             </div>
@@ -349,7 +350,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 💳 CHECKOUT MODAL FORM (Hidden by default) -->
+    <!-- 💳 CHECKOUT MODAL FORM (JUMIA STYLE) -->
     <!-- ========================================== -->
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeCheckoutModal()"></div>
@@ -374,20 +375,29 @@
                             <input type="tel" id="custPhone" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Delivery Address</label>
-                        <input type="text" id="custAddress" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                    
+                    <!-- 🚨 THE NEW GRANULAR ADDRESS FIELDS -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
+                            <select id="custState" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                                <option value="Lagos">Lagos State</option>
+                                <option value="Abuja">Abuja (FCT)</option>
+                                <option value="Ogun">Ogun State</option>
+                                <option value="Rivers">Rivers State</option>
+                                <option value="Other">Other States</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">City / L.G.A</label>
+                            <input type="text" id="custCity" placeholder="e.g. Amuwo-Odofin" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                        </div>
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
-                        <select id="custState" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
-                            <option value="Lagos">Lagos State</option>
-                            <option value="Abuja">Abuja (FCT)</option>
-                            <option value="Ogun">Ogun State</option>
-                            <option value="Rivers">Rivers State</option>
-                            <option value="Other">Other States</option>
-                        </select>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Precise Address</label>
+                        <input type="text" id="custAddress" placeholder="e.g. 22 Road, Festac Town" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                     </div>
+
                     <div class="pt-2">
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Payment Method</label>
                         <div class="space-y-2">
@@ -521,6 +531,23 @@
             else drawer.classList.toggle('hidden');
         }
 
+        // 🚨 THE NEW AUTHENTICATION GATE
+        async function handleCheckoutClick() {
+            const btn = document.getElementById('checkoutBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+            
+            const { data: { user } } = await supabase.auth.getUser();
+            
+            if (!user) {
+                alert("Please log in or create an account to secure your order.");
+                window.location.href = "login.html";
+            } else {
+                btn.innerHTML = originalText;
+                openCheckoutModal();
+            }
+        }
+
         function openCheckoutModal() {
             toggleCart();
             document.getElementById('checkoutModal').classList.remove('hidden');
@@ -531,27 +558,46 @@
         }
 
         // =================================================================
-        // THE UPDATED DATABASE CONNECTION LOGIC
+        // THE FULLY UPDATED DATABASE CONNECTION LOGIC (Fixed Pay Button)
         // =================================================================
         async function processOrder(e) {
-            e.preventDefault();
+            // This line stops the modal from freezing
+            if (e) e.preventDefault(); 
+            
+            const payBtn = document.querySelector('#orderForm button[type="submit"]');
+            payBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+            payBtn.disabled = true;
+
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             
             const name = document.getElementById('custName').value;
             const email = document.getElementById('custEmail').value;
             const phone = document.getElementById('custPhone').value;
+            const city = document.getElementById('custCity').value;
             const address = document.getElementById('custAddress').value;
             const state = document.getElementById('custState').value;
 
+            // Basic validation fallback
+            if (!name || !email || !phone || !address || !city) {
+                alert("Please fill in all delivery details.");
+                payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                payBtn.disabled = false;
+                return;
+            }
+
             const hasLagosOnlyItem = cart.some(item => item.id === 3);
             if (hasLagosOnlyItem && state !== 'Lagos') {
-                alert('Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only. Please update your address or remove the item.');
+                alert('Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.');
+                payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                payBtn.disabled = false;
                 return;
             }
 
             const payType = document.querySelector('input[name="payType"]:checked').value;
 
-            // Sends data to Supabase exactly matching your table columns
+            // Concatenate City and Address before sending to the database
+            const fullDeliveryAddress = address + ", " + city;
+
             const saveOrderToDatabase = async (reference, paymentMethod) => {
                 const { error } = await supabase
                     .from('orders')
@@ -559,7 +605,7 @@
                         customer_name: name,
                         customer_email: email,       
                         customer_phone: phone,
-                        delivery_address: address,   
+                        delivery_address: fullDeliveryAddress,   
                         state: state,                
                         total_amount: totalPrice,
                         cart_items: cart, 
@@ -582,25 +628,29 @@
                     ref: 'RDX_' + Math.floor((Math.random() * 1000000000) + 1),
                     callback: async function(response) {
                         await saveOrderToDatabase(response.reference, 'Paystack');
-                        
-                        alert('Payment Successful! Reference: ' + response.reference + '\nOrder has been placed.');
+                        alert('Payment Successful! Reference: ' + response.reference);
                         cart = [];
                         renderCart();
                         closeCheckoutModal();
+                        payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                        payBtn.disabled = false;
                     },
                     onClose: function() {
                         alert('Checkout was cancelled.');
+                        payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                        payBtn.disabled = false;
                     }
                 });
                 handler.openIframe();
             } else {
                 const podRef = 'POD_' + Math.floor((Math.random() * 1000000000) + 1);
                 await saveOrderToDatabase(podRef, 'Pay on Delivery');
-                
                 alert('Order Confirmed (Pay on Delivery). Our dispatch team will call you shortly.');
                 cart = [];
                 renderCart();
                 closeCheckoutModal();
+                payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                payBtn.disabled = false;
             }
         }
     </script>
