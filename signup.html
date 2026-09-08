@@ -25,7 +25,7 @@
             <p class="text-sm text-gray-500 mt-1">Join to track orders and get faster checkouts.</p>
         </div>
 
-        <form id="signupForm" onsubmit="handleSignup(event)" class="space-y-4">
+        <form id="signupForm" onsubmit="window.handleSignup(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
                 <input type="text" id="fullName" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
@@ -54,8 +54,7 @@
             <div class="flex-1 border-t border-gray-200"></div>
         </div>
 
-        <!-- GOOGLE AUTH BUTTON -->
-        <button onclick="loginWithGoogle()" class="mt-6 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-bold py-2.5 rounded text-sm transition shadow-sm">
+        <button onclick="window.loginWithGoogle()" class="mt-6 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-bold py-2.5 rounded text-sm transition shadow-sm">
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
             Sign up with Google
         </button>
@@ -65,13 +64,17 @@
         </div>
     </div>
 
-    <!-- SUPABASE ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabase = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
+        let dbClient = null;
+        if (window.supabase) {
+            dbClient = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
+        }
 
-        async function handleSignup(e) {
+        window.handleSignup = async function(e) {
             e.preventDefault();
+            if (!dbClient) return alert("Database connection failed. Please refresh the page.");
+            
             const btn = document.getElementById('submitBtn');
             const originalText = btn.innerText;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
@@ -83,43 +86,36 @@
             const password = document.getElementById('password').value;
 
             try {
-                // 1. Create the user in Supabase Auth
-                const { data: authData, error: authError } = await supabase.auth.signUp({
+                const { data: authData, error: authError } = await dbClient.auth.signUp({
                     email: email,
                     password: password
                 });
 
                 if (authError) throw authError;
 
-                // 2. Save their profile details to the database so we can greet them
                 if (authData.user) {
-                    const { error: profileError } = await supabase
-                        .from('profiles')
-                        .insert([{ 
-                            id: authData.user.id, 
-                            full_name: name,
-                            phone: phone 
-                        }]);
-                    
-                    if (profileError) console.warn("Profile creation note:", profileError.message);
+                    await dbClient.from('profiles').insert([{ 
+                        id: authData.user.id, 
+                        full_name: name,
+                        phone: phone 
+                    }]);
                 }
 
                 alert("Account created successfully! Redirecting to the store...");
                 window.location.href = "index.html";
-
             } catch (err) {
                 console.error("Signup error:", err.message);
                 alert("Error: " + err.message);
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
-        }
+        };
 
-        async function loginWithGoogle() {
-            // The code is ready, waiting for Phase 2 API Keys
-            const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-            if (error) alert("Google Sign-In is not yet configured in the Cloud Console.");
-        }
+        window.loginWithGoogle = async function() {
+            if (!dbClient) return;
+            const { data, error } = await dbClient.auth.signInWithOAuth({ provider: 'google' });
+            if (error) alert("Google Sign-In is not yet configured.");
+        };
     </script>
 </body>
 </html>

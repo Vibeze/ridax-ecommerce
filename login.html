@@ -25,7 +25,7 @@
             <p class="text-sm text-gray-500 mt-1">Log in to your Ridax account.</p>
         </div>
 
-        <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+        <form id="loginForm" onsubmit="window.handleLogin(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
                 <input type="email" id="email" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
@@ -49,8 +49,7 @@
             <div class="flex-1 border-t border-gray-200"></div>
         </div>
 
-        <!-- GOOGLE AUTH BUTTON -->
-        <button onclick="loginWithGoogle()" class="mt-6 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-bold py-2.5 rounded text-sm transition shadow-sm">
+        <button onclick="window.loginWithGoogle()" class="mt-6 w-full flex items-center justify-center gap-3 bg-white border border-gray-300 hover:bg-gray-50 text-gray-800 font-bold py-2.5 rounded text-sm transition shadow-sm">
             <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5">
             Log in with Google
         </button>
@@ -60,13 +59,17 @@
         </div>
     </div>
 
-    <!-- SUPABASE ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabase = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
+        let dbClient = null;
+        if (window.supabase) {
+            dbClient = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
+        }
 
-        async function handleLogin(e) {
+        window.handleLogin = async function(e) {
             e.preventDefault();
+            if (!dbClient) return alert("Database connection failed. Please refresh the page.");
+
             const btn = document.getElementById('loginBtn');
             const originalText = btn.innerText;
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
@@ -76,14 +79,12 @@
             const password = document.getElementById('password').value;
 
             try {
-                const { data, error } = await supabase.auth.signInWithPassword({
+                const { data, error } = await dbClient.auth.signInWithPassword({
                     email: email,
                     password: password
                 });
 
                 if (error) throw error;
-
-                // Redirect to the main store page upon success
                 window.location.href = "index.html";
 
             } catch (err) {
@@ -92,13 +93,13 @@
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
-        }
+        };
 
-        async function loginWithGoogle() {
-            // The code is ready, waiting for Phase 2 API Keys
-            const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-            if (error) alert("Google Sign-In is not yet configured in the Cloud Console.");
-        }
+        window.loginWithGoogle = async function() {
+            if (!dbClient) return;
+            const { data, error } = await dbClient.auth.signInWithOAuth({ provider: 'google' });
+            if (error) alert("Google Sign-In is not yet configured.");
+        };
     </script>
 </body>
 </html>
