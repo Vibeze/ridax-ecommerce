@@ -6,6 +6,7 @@
     <title>Ridax | Premium Pesticide Marketplace</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Paystack Library -->
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -29,12 +30,10 @@
 </head>
 <body class="bg-[#f2f2f2] text-gray-800 antialiased">
 
-    <!-- TOP NOTIFICATION BAR -->
     <div class="bg-green-900 text-white text-[11px] py-2 px-4 text-center tracking-wide font-medium">
         To order, WhatsApp/Call: <span class="font-bold">0800-RIDAX-NG</span>. DO NOT MAKE PAYMENTS INTO ANY PERSONAL ACCOUNT!!!
     </div>
 
-    <!-- HEADER & NAVIGATION -->
     <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
         <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between gap-6">
             
@@ -84,8 +83,8 @@
         </div>
     </header>
 
-    <!-- MAIN PRODUCT GRID -->
     <main class="max-w-[1400px] mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+        
         <aside class="w-full md:w-64 shrink-0 hidden md:block">
             <div class="bg-white p-4 rounded-md shadow-sm mb-4 border border-gray-100">
                 <h4 class="font-bold text-gray-800 mb-3 text-sm uppercase">Search Products</h4>
@@ -94,6 +93,7 @@
                     <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-gray-400 text-xs"></i>
                 </div>
             </div>
+
             <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100">
                 <h4 class="font-bold text-gray-800 mb-4 text-sm uppercase border-b pb-2">Price Filter</h4>
                 <ul class="text-sm text-gray-600 space-y-3">
@@ -121,7 +121,7 @@
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                <!-- PRODUCT 1 -->
+                
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
                     <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
@@ -134,10 +134,10 @@
                         </div>
                         <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦20,000.00</span></div>
                     </div>
+                    <!-- UI TRIGGER -->
                     <button onclick="addToCart(1, 'Ridax Pest Spray (500ml) - 2 Pack', 20000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
-                <!-- PRODUCT 2 -->
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <span class="absolute top-2 left-2 bg-ridax text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">BEST SELLER</span>
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
@@ -154,7 +154,6 @@
                     <button onclick="addToCart(2, 'Ridax Pest Spray (500ml) - 4 Pack', 34000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
-                <!-- PRODUCT 3 -->
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">LAGOS ONLY</span>
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
@@ -171,7 +170,6 @@
                     <button onclick="addToCart(3, 'Ridax Pest Spray (300ml) - 2 Pack', 18000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
-                <!-- PRODUCT 4 -->
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
                     <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
@@ -186,11 +184,11 @@
                     </div>
                     <button onclick="addToCart(4, 'Ridax Cockroach Powder', 12000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
+
             </div>
         </div>
     </main>
 
-    <!-- FOOTER SECTION -->
     <section class="bg-black text-white py-10 mt-12 border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex gap-4">
@@ -236,16 +234,14 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/" target="_blank" class="fixed bottom-6 right-6 z-40 bg-green-500 text-white p-3 rounded-full shadow-xl hover:bg-green-600 transition flex items-center justify-center h-14 w-14">
-        <i class="fa-brands fa-whatsapp text-3xl"></i>
-    </a>
-
     <!-- CART DRAWER -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleCart()"></div>
         <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col z-10 transform transition-transform duration-300">
             <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-ridax"></i> Shopping Cart</h3>
+                <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-ridax"></i> Shopping Cart
+                </h3>
                 <button onclick="toggleCart()" class="text-gray-400 hover:text-gray-800 text-xl font-bold">✕</button>
             </div>
             <div id="cartItems" class="flex-1 overflow-y-auto p-4 divide-y divide-gray-100"></div>
@@ -285,6 +281,7 @@
                             <input type="tel" id="custPhone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                     </div>
+                    
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
@@ -305,6 +302,7 @@
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Precise Address</label>
                         <input type="text" id="custAddress" placeholder="e.g. 22 Road, Festac Town" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                     </div>
+
                     <div class="pt-2">
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Payment Method</label>
                         <div class="space-y-2">
@@ -328,40 +326,12 @@
         </div>
     </div>
 
-    <!-- ONE SINGLE CLEAN SCRIPT BLOCK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- ========================================== -->
+    <!-- SCRIPT 1: CORE UI (NEVER CRASHES) -->
+    <!-- ========================================== -->
     <script>
-        const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
-        const supabaseAnonKey = 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-        let currentUser = null; 
         let cart = [];
-
-        async function checkAuthState() {
-            try {
-                const { data: { user } } = await supabase.auth.getUser();
-                if (user) {
-                    currentUser = user; 
-                    const { data: profile } = await supabase
-                        .from('profiles').select('full_name').eq('id', user.id).single();
-
-                    if (profile && profile.full_name) {
-                        const firstName = profile.full_name.split(' ')[0];
-                        const authBtn = document.getElementById('auth-btn');
-                        const authText = document.getElementById('auth-text');
-                        if (authText) authText.innerText = 'Hi, ' + firstName;
-                        if (authBtn) {
-                            authBtn.href = 'dashboard.html'; 
-                            authBtn.classList.add('text-ridax', 'font-bold');
-                        }
-                    }
-                }
-            } catch (err) {
-                console.error("Auth init error:", err);
-            }
-        }
-        checkAuthState();
 
         function addToCart(id, name, price) {
             const existing = cart.find(item => item.id === id);
@@ -432,15 +402,6 @@
             else drawer.classList.toggle('hidden');
         }
 
-        function handleCheckoutClick() {
-            if (!currentUser) {
-                alert("Please log in or create an account to secure your order.");
-                window.location.href = "login.html";
-                return;
-            }
-            openCheckoutModal();
-        }
-
         function openCheckoutModal() {
             toggleCart();
             const modal = document.getElementById('checkoutModal');
@@ -451,10 +412,63 @@
             const modal = document.getElementById('checkoutModal');
             if (modal) modal.classList.add('hidden');
         }
+    </script>
 
-        async function processOrder(e) {
-            if (e) e.preventDefault(); 
-            
+
+    <!-- ========================================== -->
+    <!-- SCRIPT 2: DATABASE & BACKEND LOGIC -->
+    <!-- ========================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        let supabase = null;
+        let currentUser = null;
+
+        // 1. SAFELY INITIALIZE DATABASE
+        try {
+            if (window.supabase) {
+                supabase = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
+            }
+        } catch (err) {
+            console.error("Database connection blocked or failed:", err);
+        }
+
+        // 2. CHECK LOGIN STATUS
+        async function checkAuthState() {
+            if (!supabase) return;
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                if (user) {
+                    currentUser = user;
+                    const { data: profile } = await supabase.from('profiles').select('full_name').eq('id', user.id).single();
+                    if (profile && profile.full_name) {
+                        const firstName = profile.full_name.split(' ')[0];
+                        const authBtn = document.getElementById('auth-btn');
+                        const authText = document.getElementById('auth-text');
+                        if (authText) authText.innerText = 'Hi, ' + firstName;
+                        if (authBtn) {
+                            authBtn.href = 'dashboard.html'; 
+                            authBtn.classList.add('text-ridax', 'font-bold');
+                        }
+                    }
+                }
+            } catch (err) {}
+        }
+        
+        // Ensure auth check fires immediately
+        window.addEventListener('load', checkAuthState);
+
+        // 3. AUTH GATE
+        function handleCheckoutClick() {
+            if (!currentUser) {
+                alert("Please log in or create an account to secure your order.");
+                window.location.href = "login.html";
+                return;
+            }
+            openCheckoutModal();
+        }
+
+        // 4. PROCESS ORDER
+        async function processOrder() {
             const payBtn = document.getElementById('paySubmitBtn');
             const originalBtnHtml = payBtn ? payBtn.innerHTML : 'Pay';
             
@@ -465,7 +479,6 @@
 
             try {
                 const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                
                 const name = document.getElementById('custName')?.value.trim();
                 const email = document.getElementById('custEmail')?.value.trim();
                 const phone = document.getElementById('custPhone')?.value.trim();
@@ -490,6 +503,7 @@
                 const fullAddress = `${address}, ${city}`;
 
                 const saveOrderToDatabase = async (reference) => {
+                    if (!supabase) throw new Error("Database unavailable");
                     const { error } = await supabase.from('orders').insert([{
                         customer_name: name, customer_email: email, customer_phone: phone,
                         delivery_address: fullAddress, state: state, total_amount: totalPrice,
@@ -499,6 +513,7 @@
                 };
 
                 if (payType === 'card') {
+                    if (!window.PaystackPop) throw new Error("Payment gateway blocked");
                     let handler = PaystackPop.setup({
                         key: 'pk_test_1263258844c391426936d45b3c68bfa80d61773b',
                         email: email,
@@ -526,7 +541,7 @@
                 }
             } catch (err) {
                 console.error("Order process error:", err);
-                alert("There was an error processing your order. Please check the console or try again.");
+                alert("There was an error processing your order. Please disable adblockers or try again.");
                 if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
             }
         }
