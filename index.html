@@ -6,7 +6,7 @@
     <title>Ridax | Premium Pesticide Marketplace</title>
     
     <!-- ========================================== -->
-    <!-- 🎨 EXTERNAL LIBRARIES (Tailwind, FontAwesome, Paystack) -->
+    <!-- 🎨 EXTERNAL LIBRARIES -->
     <!-- ========================================== -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -73,7 +73,6 @@
                     </div>
                 </div>
 
-                <!-- AUTH BUTTON: JavaScript changes this when logged in -->
                 <a href="login.html" id="auth-btn" class="flex items-center gap-2 text-sm font-medium hover:text-ridax cursor-pointer transition">
                     <i class="fa-regular fa-user text-xl"></i>
                     <span id="auth-text" class="hidden md:inline">Account</span>
@@ -323,7 +322,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 🛒 SHOPPING CART DRAWER (Hidden by default) -->
+    <!-- 🛒 SHOPPING CART DRAWER -->
     <!-- ========================================== -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleCart()"></div>
@@ -340,7 +339,6 @@
                     <span class="text-sm font-medium text-gray-600">Total:</span>
                     <span id="cartTotal" class="text-2xl font-black text-ridax">₦0.00</span>
                 </div>
-                <!-- 🚨 THE UPDATED CHECKOUT BUTTON TRIGGER -->
                 <button onclick="handleCheckoutClick()" id="checkoutBtn" disabled class="w-full bg-ridax hover:bg-ridax-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
                     Checkout Now
                 </button>
@@ -376,7 +374,6 @@
                         </div>
                     </div>
                     
-                    <!-- 🚨 THE NEW GRANULAR ADDRESS FIELDS -->
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
@@ -421,45 +418,50 @@
         </div>
     </div>
 
-
     <!-- ========================================== -->
-    <!-- 🧠 SUPABASE AUTHENTICATION SCRIPT -->
+    <!-- 🧠 CORE SYSTEM SCRIPT (Unified Engine) -->
     <!-- ========================================== -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // ----------------------------------------------------
+        // 1. SUPABASE INITIALIZATION
+        // ----------------------------------------------------
         const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
         const supabaseAnonKey = 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX';
         const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 
+        // ----------------------------------------------------
+        // 2. AUTH STATE LISTENER (Runs on page load)
+        // ----------------------------------------------------
         async function checkAuthState() {
-            const { data: { user } } = await supabase.auth.getUser();
-            
-            const authBtn = document.getElementById('auth-btn');
-            const authText = document.getElementById('auth-text');
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                const authBtn = document.getElementById('auth-btn');
+                const authText = document.getElementById('auth-text');
 
-            if (user) {
-                const { data: profile } = await supabase
-                    .from('profiles')
-                    .select('full_name')
-                    .eq('id', user.id)
-                    .single();
+                if (user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('full_name')
+                        .eq('id', user.id)
+                        .single();
 
-                if (profile && profile.full_name) {
-                    const firstName = profile.full_name.split(' ')[0];
-                    authText.innerText = 'Hi, ' + firstName;
-                    authBtn.href = 'dashboard.html'; 
-                    authBtn.classList.add('text-ridax', 'font-bold');
+                    if (profile && profile.full_name) {
+                        const firstName = profile.full_name.split(' ')[0];
+                        authText.innerText = 'Hi, ' + firstName;
+                        authBtn.href = 'dashboard.html'; 
+                        authBtn.classList.add('text-ridax', 'font-bold');
+                    }
                 }
+            } catch (error) {
+                console.error("Auth check failed:", error);
             }
         }
         checkAuthState();
-    </script>
 
-
-    <!-- ========================================== -->
-    <!-- ⚙️ CORE JAVASCRIPT LOGIC (Cart & Checkout) -->
-    <!-- ========================================== -->
-    <script>
+        // ----------------------------------------------------
+        // 3. CART LOGIC
+        // ----------------------------------------------------
         let cart = [];
 
         function addToCart(id, name, price) {
@@ -531,20 +533,32 @@
             else drawer.classList.toggle('hidden');
         }
 
-        // 🚨 THE NEW AUTHENTICATION GATE
+        // ----------------------------------------------------
+        // 4. JUMIA-STYLE AUTHENTICATION GATE
+        // ----------------------------------------------------
         async function handleCheckoutClick() {
             const btn = document.getElementById('checkoutBtn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+            const originalText = btn.innerHTML; 
             
-            const { data: { user } } = await supabase.auth.getUser();
-            
-            if (!user) {
-                alert("Please log in or create an account to secure your order.");
-                window.location.href = "login.html";
-            } else {
+            try {
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
+                btn.disabled = true;
+                
+                const { data: { user }, error } = await supabase.auth.getUser();
+                
+                if (error || !user) {
+                    alert("Please log in or create an account to secure your order.");
+                    window.location.href = "login.html";
+                } else {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    openCheckoutModal();
+                }
+            } catch (err) {
+                console.error("Checkout gate error:", err);
+                alert("Network error. Please try checking out again.");
                 btn.innerHTML = originalText;
-                openCheckoutModal();
+                btn.disabled = false;
             }
         }
 
@@ -557,11 +571,10 @@
             document.getElementById('checkoutModal').classList.add('hidden');
         }
 
-        // =================================================================
-        // THE FULLY UPDATED DATABASE CONNECTION LOGIC (Fixed Pay Button)
-        // =================================================================
+        // ----------------------------------------------------
+        // 5. DATABASE CONNECTION & CHECKOUT LOGIC
+        // ----------------------------------------------------
         async function processOrder(e) {
-            // This line stops the modal from freezing
             if (e) e.preventDefault(); 
             
             const payBtn = document.querySelector('#orderForm button[type="submit"]');
@@ -594,8 +607,6 @@
             }
 
             const payType = document.querySelector('input[name="payType"]:checked').value;
-
-            // Concatenate City and Address before sending to the database
             const fullDeliveryAddress = address + ", " + city;
 
             const saveOrderToDatabase = async (reference, paymentMethod) => {
