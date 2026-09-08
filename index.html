@@ -6,7 +6,6 @@
     <title>Ridax | Premium Pesticide Marketplace</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Paystack Library -->
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -30,10 +29,12 @@
 </head>
 <body class="bg-[#f2f2f2] text-gray-800 antialiased">
 
+    <!-- TOP NOTIFICATION BAR -->
     <div class="bg-green-900 text-white text-[11px] py-2 px-4 text-center tracking-wide font-medium">
         To order, WhatsApp/Call: <span class="font-bold">0800-RIDAX-NG</span>. DO NOT MAKE PAYMENTS INTO ANY PERSONAL ACCOUNT!!!
     </div>
 
+    <!-- HEADER & NAVIGATION -->
     <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
         <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between gap-6">
             
@@ -83,8 +84,8 @@
         </div>
     </header>
 
+    <!-- MAIN PRODUCT GRID -->
     <main class="max-w-[1400px] mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
-        
         <aside class="w-full md:w-64 shrink-0 hidden md:block">
             <div class="bg-white p-4 rounded-md shadow-sm mb-4 border border-gray-100">
                 <h4 class="font-bold text-gray-800 mb-3 text-sm uppercase">Search Products</h4>
@@ -93,7 +94,6 @@
                     <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-gray-400 text-xs"></i>
                 </div>
             </div>
-
             <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100">
                 <h4 class="font-bold text-gray-800 mb-4 text-sm uppercase border-b pb-2">Price Filter</h4>
                 <ul class="text-sm text-gray-600 space-y-3">
@@ -121,7 +121,6 @@
             </div>
 
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
                     <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
@@ -134,7 +133,6 @@
                         </div>
                         <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦20,000.00</span></div>
                     </div>
-                    <!-- UI TRIGGER -->
                     <button onclick="addToCart(1, 'Ridax Pest Spray (500ml) - 2 Pack', 20000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
@@ -184,11 +182,11 @@
                     </div>
                     <button onclick="addToCart(4, 'Ridax Cockroach Powder', 12000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
-
             </div>
         </div>
     </main>
 
+    <!-- FOOTER SECTION -->
     <section class="bg-black text-white py-10 mt-12 border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex gap-4">
@@ -234,6 +232,10 @@
         </div>
     </footer>
 
+    <a href="https://wa.me/" target="_blank" class="fixed bottom-6 right-6 z-40 bg-green-500 text-white p-3 rounded-full shadow-xl hover:bg-green-600 transition flex items-center justify-center h-14 w-14">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+    </a>
+
     <!-- CART DRAWER -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="toggleCart()"></div>
@@ -250,7 +252,8 @@
                     <span class="text-sm font-medium text-gray-600">Total:</span>
                     <span id="cartTotal" class="text-2xl font-black text-ridax">₦0.00</span>
                 </div>
-                <button onclick="handleCheckoutClick()" id="checkoutBtn" disabled class="w-full bg-ridax hover:bg-ridax-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
+                <!-- BULLETPROOF BUTTON CALL -->
+                <button onclick="window.handleCheckoutClick()" id="checkoutBtn" disabled class="w-full bg-ridax hover:bg-ridax-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
                     Checkout Now
                 </button>
             </div>
@@ -318,7 +321,7 @@
                     </div>
                 </div>
                 <div class="mt-6 border-t pt-4">
-                    <button type="button" id="paySubmitBtn" onclick="processOrder()" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2">
+                    <button type="button" id="paySubmitBtn" onclick="window.processOrder()" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2">
                         <i class="fa-solid fa-lock"></i> Pay <span id="modalTotal">₦0.00</span>
                     </button>
                 </div>
@@ -326,120 +329,32 @@
         </div>
     </div>
 
-
-    <!-- ========================================== -->
-    <!-- SCRIPT 1: CORE UI (NEVER CRASHES) -->
-    <!-- ========================================== -->
-    <script>
-        let cart = [];
-
-        function addToCart(id, name, price) {
-            const existing = cart.find(item => item.id === id);
-            if (existing) {
-                existing.qty++;
-            } else {
-                cart.push({ id, name, price, qty: 1 });
-            }
-            renderCart();
-            toggleCart(true);
-        }
-
-        function updateQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (!item) return;
-            item.qty += delta;
-            if (item.qty <= 0) {
-                cart = cart.filter(i => i.id !== id);
-            }
-            renderCart();
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cartItems');
-            const checkoutBtn = document.getElementById('checkoutBtn');
-            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-            const formattedTotal = '₦' + totalPrice.toLocaleString(undefined, {minimumFractionDigits: 2});
-
-            const cartCountElement = document.getElementById('cartCount');
-            const cartTotalElement = document.getElementById('cartTotal');
-            const modalTotal = document.getElementById('modalTotal');
-            const navTotal = document.querySelector('.bg-ridax-light span.font-bold');
-            
-            if (cartCountElement) cartCountElement.innerText = totalItems;
-            if (cartTotalElement) cartTotalElement.innerText = formattedTotal;
-            if (modalTotal) modalTotal.innerText = formattedTotal;
-            if (navTotal) navTotal.innerText = formattedTotal;
-
-            if (cart.length === 0) {
-                if (container) container.innerHTML = `<div class="text-center py-16 text-gray-400">Your cart is empty.</div>`;
-                if (checkoutBtn) checkoutBtn.disabled = true;
-                return;
-            }
-
-            if (checkoutBtn) checkoutBtn.disabled = false;
-            if (container) {
-                container.innerHTML = cart.map(item => `
-                    <div class="py-4 flex justify-between items-center border-b border-gray-50">
-                        <div class="flex-1 pr-4">
-                            <h5 class="text-sm font-semibold">${item.name}</h5>
-                            <span class="text-sm font-bold text-ridax mt-1 block">₦${item.price.toLocaleString()}</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gray-50 p-1 rounded">
-                            <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">-</button>
-                            <span class="text-sm font-bold w-4 text-center">${item.qty}</span>
-                            <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">+</button>
-                        </div>
-                    </div>
-                `).join('');
-            }
-        }
-
-        function toggleCart(forceOpen = false) {
-            const drawer = document.getElementById('cartDrawer');
-            if (!drawer) return;
-            if (forceOpen) drawer.classList.remove('hidden');
-            else drawer.classList.toggle('hidden');
-        }
-
-        function openCheckoutModal() {
-            toggleCart();
-            const modal = document.getElementById('checkoutModal');
-            if (modal) modal.classList.remove('hidden');
-        }
-
-        function closeCheckoutModal() {
-            const modal = document.getElementById('checkoutModal');
-            if (modal) modal.classList.add('hidden');
-        }
-    </script>
-
-
-    <!-- ========================================== -->
-    <!-- SCRIPT 2: DATABASE & BACKEND LOGIC -->
-    <!-- ========================================== -->
+    <!-- ONE BULLETPROOF SCRIPT ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        let supabase = null;
-        let currentUser = null;
+        // Use explicitly distinct variable names to prevent Firefox collisions
+        let appCart = [];
+        let dbClient = null;
+        let activeUser = null;
 
-        // 1. SAFELY INITIALIZE DATABASE
+        // Initialize DB safely
         try {
             if (window.supabase) {
-                supabase = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
+                dbClient = window.supabase.createClient(
+                    'https://gvhptxabpbpnabmxnuix.supabase.co', 
+                    'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX'
+                );
             }
-        } catch (err) {
-            console.error("Database connection blocked or failed:", err);
-        }
+        } catch(e) { console.warn("Supabase init blocked:", e); }
 
-        // 2. CHECK LOGIN STATUS
-        async function checkAuthState() {
-            if (!supabase) return;
+        // Bind everything directly to the Window so the HTML buttons can NEVER lose connection
+        window.checkAuthState = async function() {
+            if (!dbClient) return;
             try {
-                const { data: { user } } = await supabase.auth.getUser();
+                const { data: { user } } = await dbClient.auth.getUser();
                 if (user) {
-                    currentUser = user;
-                    const { data: profile } = await supabase.from('profiles').select('full_name').eq('id', user.id).single();
+                    activeUser = user;
+                    const { data: profile } = await dbClient.from('profiles').select('full_name').eq('id', user.id).single();
                     if (profile && profile.full_name) {
                         const firstName = profile.full_name.split(' ')[0];
                         const authBtn = document.getElementById('auth-btn');
@@ -451,24 +366,94 @@
                         }
                     }
                 }
-            } catch (err) {}
-        }
-        
-        // Ensure auth check fires immediately
-        window.addEventListener('load', checkAuthState);
+            } catch(e) { console.warn("Auth check failed:", e); }
+        };
 
-        // 3. AUTH GATE
-        function handleCheckoutClick() {
-            if (!currentUser) {
+        window.onload = window.checkAuthState;
+
+        window.addToCart = function(id, name, price) {
+            const existing = appCart.find(item => item.id === id);
+            if (existing) existing.qty++;
+            else appCart.push({ id, name, price, qty: 1 });
+            window.renderCart();
+            window.toggleCart(true);
+        };
+
+        window.updateQty = function(id, delta) {
+            const item = appCart.find(i => i.id === id);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) appCart = appCart.filter(i => i.id !== id);
+            window.renderCart();
+        };
+
+        window.renderCart = function() {
+            const container = document.getElementById('cartItems');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const totalItems = appCart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = appCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const formattedTotal = '₦' + totalPrice.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+            if (document.getElementById('cartCount')) document.getElementById('cartCount').innerText = totalItems;
+            if (document.getElementById('cartTotal')) document.getElementById('cartTotal').innerText = formattedTotal;
+            if (document.getElementById('modalTotal')) document.getElementById('modalTotal').innerText = formattedTotal;
+
+            if (appCart.length === 0) {
+                if (container) container.innerHTML = `<div class="text-center py-16 text-gray-400">Your cart is empty.</div>`;
+                if (checkoutBtn) checkoutBtn.disabled = true;
+                return;
+            }
+
+            if (checkoutBtn) checkoutBtn.disabled = false;
+            if (container) {
+                container.innerHTML = appCart.map(item => `
+                    <div class="py-4 flex justify-between items-center border-b border-gray-50">
+                        <div class="flex-1 pr-4">
+                            <h5 class="text-sm font-semibold">${item.name}</h5>
+                            <span class="text-sm font-bold text-ridax mt-1 block">₦${item.price.toLocaleString()}</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-gray-50 p-1 rounded">
+                            <button onclick="window.updateQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">-</button>
+                            <span class="text-sm font-bold w-4 text-center">${item.qty}</span>
+                            <button onclick="window.updateQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        };
+
+        window.toggleCart = function(forceOpen) {
+            const drawer = document.getElementById('cartDrawer');
+            if (!drawer) return;
+            // Handle both exact booleans and raw click events gracefully
+            if (forceOpen === true) drawer.classList.remove('hidden');
+            else if (forceOpen === false) drawer.classList.add('hidden');
+            else drawer.classList.toggle('hidden');
+        };
+
+        window.handleCheckoutClick = function() {
+            if (!activeUser) {
                 alert("Please log in or create an account to secure your order.");
                 window.location.href = "login.html";
                 return;
             }
-            openCheckoutModal();
-        }
+            window.openCheckoutModal();
+        };
 
-        // 4. PROCESS ORDER
-        async function processOrder() {
+        window.openCheckoutModal = function() {
+            window.toggleCart(false); 
+            const modal = document.getElementById('checkoutModal');
+            if (modal) modal.classList.remove('hidden');
+        };
+
+        window.closeCheckoutModal = function() {
+            const modal = document.getElementById('checkoutModal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.processOrder = async function(e) {
+            if (e) e.preventDefault(); 
+            
             const payBtn = document.getElementById('paySubmitBtn');
             const originalBtnHtml = payBtn ? payBtn.innerHTML : 'Pay';
             
@@ -478,7 +463,8 @@
             }
 
             try {
-                const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                const totalPrice = appCart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                
                 const name = document.getElementById('custName')?.value.trim();
                 const email = document.getElementById('custEmail')?.value.trim();
                 const phone = document.getElementById('custPhone')?.value.trim();
@@ -492,7 +478,7 @@
                     return;
                 }
 
-                if (cart.some(item => item.id === 3) && state !== 'Lagos') {
+                if (appCart.some(item => item.id === 3) && state !== 'Lagos') {
                     alert('Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.');
                     if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                     return;
@@ -503,18 +489,18 @@
                 const fullAddress = `${address}, ${city}`;
 
                 const saveOrderToDatabase = async (reference) => {
-                    if (!supabase) throw new Error("Database unavailable");
-                    const { error } = await supabase.from('orders').insert([{
+                    if (!dbClient) throw new Error("Database unavailable");
+                    const { error } = await dbClient.from('orders').insert([{
                         customer_name: name, customer_email: email, customer_phone: phone,
                         delivery_address: fullAddress, state: state, total_amount: totalPrice,
-                        cart_items: cart, payment_reference: reference, status: 'pending'
+                        cart_items: appCart, payment_reference: reference, status: 'pending'
                     }]);
                     if (error) throw error;
                 };
 
                 if (payType === 'card') {
                     if (!window.PaystackPop) throw new Error("Payment gateway blocked");
-                    let handler = PaystackPop.setup({
+                    let handler = window.PaystackPop.setup({
                         key: 'pk_test_1263258844c391426936d45b3c68bfa80d61773b',
                         email: email,
                         amount: totalPrice * 100, 
@@ -523,7 +509,7 @@
                         callback: async function(response) {
                             await saveOrderToDatabase(response.reference);
                             alert('Payment Successful! Reference: ' + response.reference);
-                            cart = []; renderCart(); closeCheckoutModal();
+                            appCart = []; window.renderCart(); window.closeCheckoutModal();
                             if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                         },
                         onClose: function() {
@@ -536,15 +522,15 @@
                     const podRef = 'POD_' + Math.floor(Math.random() * 1000000000);
                     await saveOrderToDatabase(podRef);
                     alert('Order Confirmed (Pay on Delivery). Our dispatch team will call you shortly.');
-                    cart = []; renderCart(); closeCheckoutModal();
+                    appCart = []; window.renderCart(); window.closeCheckoutModal();
                     if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                 }
             } catch (err) {
                 console.error("Order process error:", err);
-                alert("There was an error processing your order. Please disable adblockers or try again.");
+                alert("There was an error processing your order. Please check the console or try again.");
                 if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
             }
-        }
+        };
     </script>
 </body>
 </html>
