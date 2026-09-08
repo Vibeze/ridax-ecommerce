@@ -357,20 +357,21 @@
                 <h3 class="font-bold text-lg text-gray-900">Checkout</h3>
                 <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-gray-700 font-bold">✕</button>
             </div>
-            <form id="orderForm" onsubmit="processOrder(event)">
+            <!-- 🚨 NO NATIVE ONSUBMIT - PURE JS CONTROL -->
+            <form id="orderForm">
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
-                        <input type="text" id="custName" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                        <input type="text" id="custName" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
-                            <input type="email" id="custEmail" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <input type="email" id="custEmail" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone</label>
-                            <input type="tel" id="custPhone" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <input type="tel" id="custPhone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                     </div>
                     
@@ -387,12 +388,12 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">City / L.G.A</label>
-                            <input type="text" id="custCity" placeholder="e.g. Amuwo-Odofin" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <input type="text" id="custCity" placeholder="e.g. Amuwo-Odofin" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Precise Address</label>
-                        <input type="text" id="custAddress" placeholder="e.g. 22 Road, Festac Town" required class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                        <input type="text" id="custAddress" placeholder="e.g. 22 Road, Festac Town" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
                     </div>
 
                     <div class="pt-2">
@@ -410,7 +411,8 @@
                     </div>
                 </div>
                 <div class="mt-6 border-t pt-4">
-                    <button type="submit" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2">
+                    <!-- 🚨 JAVASCRIPT BUTTON TRIGGER -->
+                    <button type="button" id="paySubmitBtn" onclick="processOrder()" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2">
                         <i class="fa-solid fa-lock"></i> Pay <span id="modalTotal">₦0.00</span>
                     </button>
                 </div>
@@ -544,9 +546,12 @@
                 btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Checking...';
                 btn.disabled = true;
                 
-                const { data: { user }, error } = await supabase.auth.getUser();
+                // Force browser to update the button visually before checking the network
+                await new Promise(resolve => setTimeout(resolve, 50));
                 
-                if (error || !user) {
+                const { data, error } = await supabase.auth.getUser();
+                
+                if (error || !data?.user) {
                     alert("Please log in or create an account to secure your order.");
                     window.location.href = "login.html";
                 } else {
@@ -572,28 +577,28 @@
         }
 
         // ----------------------------------------------------
-        // 5. DATABASE CONNECTION & CHECKOUT LOGIC
+        // 5. DATABASE CONNECTION & BULLETPROOF CHECKOUT
         // ----------------------------------------------------
-        async function processOrder(e) {
-            if (e) e.preventDefault(); 
+        async function processOrder() {
+            const payBtn = document.getElementById('paySubmitBtn');
+            const originalBtnHtml = payBtn.innerHTML;
             
-            const payBtn = document.querySelector('#orderForm button[type="submit"]');
             payBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
             payBtn.disabled = true;
 
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             
-            const name = document.getElementById('custName').value;
-            const email = document.getElementById('custEmail').value;
-            const phone = document.getElementById('custPhone').value;
-            const city = document.getElementById('custCity').value;
-            const address = document.getElementById('custAddress').value;
+            const name = document.getElementById('custName').value.trim();
+            const email = document.getElementById('custEmail').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const city = document.getElementById('custCity').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
             const state = document.getElementById('custState').value;
 
-            // Basic validation fallback
-            if (!name || !email || !phone || !address || !city) {
-                alert("Please fill in all delivery details.");
-                payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+            // 🚨 LOUD JAVASCRIPT VALIDATION
+            if (!name || !email || !phone || !city || !address) {
+                alert("Please fill in ALL delivery details (Name, Email, Phone, City, and Precise Address).");
+                payBtn.innerHTML = originalBtnHtml;
                 payBtn.disabled = false;
                 return;
             }
@@ -601,7 +606,7 @@
             const hasLagosOnlyItem = cart.some(item => item.id === 3);
             if (hasLagosOnlyItem && state !== 'Lagos') {
                 alert('Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.');
-                payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                payBtn.innerHTML = originalBtnHtml;
                 payBtn.disabled = false;
                 return;
             }
@@ -643,12 +648,12 @@
                         cart = [];
                         renderCart();
                         closeCheckoutModal();
-                        payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                        payBtn.innerHTML = originalBtnHtml;
                         payBtn.disabled = false;
                     },
                     onClose: function() {
                         alert('Checkout was cancelled.');
-                        payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                        payBtn.innerHTML = originalBtnHtml;
                         payBtn.disabled = false;
                     }
                 });
@@ -660,7 +665,7 @@
                 cart = [];
                 renderCart();
                 closeCheckoutModal();
-                payBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Pay';
+                payBtn.innerHTML = originalBtnHtml;
                 payBtn.disabled = false;
             }
         }
