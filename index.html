@@ -580,14 +580,24 @@
                     return;
                 }
 
-                const saveOrderToDatabase = async (reference) => {
+               const saveOrderToDatabase = async (reference) => {
                     if (!dbClient) throw new Error("Database unavailable");
+                    
                     const { error } = await dbClient.from('orders').insert([{
                         customer_name: name, customer_email: email, customer_phone: phone,
                         delivery_address: fullAddress, state: state, total_amount: totalPrice,
-                        cart_items: appCart, payment_reference: reference, status: 'pending'
+                        cart_items: appCart, payment_reference: reference, status: 'pending',
+                        // FILLING YOUR EXTRA COLUMNS TO STOP THE 400 ERROR:
+                        payment_method: payType,
+                        payment_status: payType === 'card' ? 'Paid' : 'Pending',
+                        delivery_status: 'Processing'
                     }]);
-                    if (error) throw new Error("Database insert failed");
+                    
+                    if (error) {
+                        // This forces the console to print the exact problem if it ever fails again
+                        console.error("EXACT SUPABASE ERROR:", error); 
+                        throw new Error(error.message || "Database insert failed");
+                    }
                 };
 
                 if (payType === 'card') {
