@@ -7,124 +7,138 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        ridax: {
-                            DEFAULT: '#1b7a39',
-                            dark: '#135c29',
-                            light: '#e8f3ec',
-                        }
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { ridax: { DEFAULT: '#1b7a39', dark: '#135c29' } } } } }
     </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-    </style>
 </head>
-<body class="bg-[#f2f2f2] text-gray-800 antialiased min-h-screen flex flex-col">
-
-    <!-- Header -->
-    <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
-        <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="index.html" class="text-3xl font-black text-ridax tracking-tighter flex items-center gap-1">
-                <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
-            </a>
-            <div class="flex items-center gap-6">
-                <a href="index.html" class="text-sm font-medium text-gray-500 hover:text-ridax flex items-center gap-2 transition">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Store
-                </a>
-                <button onclick="logoutUser()" class="text-sm font-bold text-red-500 hover:text-red-700 transition">
-                    Logout
-                </button>
-            </div>
+<body class="bg-gray-50 text-gray-800 antialiased">
+    <header class="bg-white shadow-sm border-b border-gray-100 py-4 px-6 flex justify-between items-center max-w-[1400px] mx-auto">
+        <a href="index.html" class="text-2xl font-black text-ridax flex items-center gap-1">
+            <i class="fa-solid fa-leaf"></i> RIDAX
+        </a>
+        <div class="flex gap-6 text-sm font-bold items-center">
+            <a href="index.html" class="text-gray-500 hover:text-ridax transition"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Store</a>
+            <button onclick="window.handleLogout()" class="text-red-500 hover:text-red-700 transition">Logout</button>
         </div>
     </header>
 
-    <!-- Dashboard Content -->
-    <main class="flex-1 max-w-[1000px] mx-auto w-full px-4 py-10">
-        
-        <div class="mb-8">
-            <h1 class="text-2xl font-bold text-gray-900">My Account</h1>
-            <p class="text-sm text-gray-500">Manage your profile and track your orders.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <!-- Profile Card -->
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 md:col-span-1 h-fit">
-                <div class="flex items-center justify-center w-16 h-16 bg-ridax-light text-ridax rounded-full mb-4 mx-auto">
-                    <i class="fa-solid fa-user text-2xl"></i>
+    <main class="max-w-[1200px] mx-auto px-4 py-10 flex flex-col md:flex-row gap-8">
+        <!-- Profile Sidebar -->
+        <aside class="w-full md:w-1/3 lg:w-1/4 shrink-0">
+            <h2 class="text-xl font-bold mb-4 text-gray-900">My Account</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-ridax text-2xl shadow-inner">
+                    <i class="fa-solid fa-user"></i>
                 </div>
-                <h2 id="dash-name" class="text-lg font-bold text-center text-gray-900 mb-1">Loading...</h2>
-                <p id="dash-email" class="text-xs text-center text-gray-500 mb-6">...</p>
-
-                <div class="space-y-4 border-t pt-4">
-                    <div>
-                        <label class="text-xs font-bold text-gray-400 uppercase block mb-1">Phone Number</label>
-                        <p id="dash-phone" class="text-sm font-medium text-gray-800">...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Orders & Activity -->
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 md:col-span-2">
-                <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Recent Orders</h3>
+                <h3 id="profileName" class="font-black text-lg text-gray-900">Loading...</h3>
+                <p id="profileEmail" class="text-sm text-gray-500 mb-5">...</p>
                 
-                <!-- Placeholder for when we connect the Python backend -->
-                <div class="flex flex-col items-center justify-center py-12 text-gray-400">
-                    <i class="fa-solid fa-box-open text-4xl mb-3 text-gray-300"></i>
-                    <p class="text-sm">You have no recent orders.</p>
-                    <a href="index.html" class="mt-4 bg-ridax text-white px-6 py-2 rounded text-sm font-bold hover:bg-ridax-dark transition">Start Shopping</a>
+                <div class="text-left border-t border-gray-100 pt-4">
+                    <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Phone Number</label>
+                    <p id="profilePhone" class="text-sm font-medium text-gray-800">...</p>
                 </div>
             </div>
+        </aside>
 
+        <!-- Order History -->
+        <div class="flex-1">
+            <h2 class="text-xl font-bold mb-4 text-gray-900">Recent Orders</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 min-h-[300px]" id="ordersContainer">
+                <div class="text-center py-16">
+                    <i class="fa-solid fa-spinner fa-spin text-4xl text-gray-300 mb-4"></i>
+                    <p class="text-gray-500 text-sm font-medium">Fetching your order history...</p>
+                </div>
+            </div>
         </div>
     </main>
 
-    <!-- Supabase JavaScript Library -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        const supabaseUrl = 'https://gvhptxabpbpnabmxnuix.supabase.co';
-        const supabaseAnonKey = 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-        async function loadDashboard() {
-            // 1. Verify user is actually logged in
-            const { data: { user }, error: authError } = await supabase.auth.getUser();
-            
-            // If not logged in, kick them back to login page
-            if (authError || !user) {
-                window.location.href = 'login.html';
-                return;
-            }
-
-            // 2. Fetch their details from the database
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('id', user.id)
-                .single();
-
-            // 3. Populate the dashboard UI
-            if (profile) {
-                document.getElementById('dash-name').innerText = profile.full_name || 'No Name Provided';
-                document.getElementById('dash-phone').innerText = profile.phone || 'No Phone Provided';
-            }
-            document.getElementById('dash-email').innerText = user.email;
+        // Bulletproof Supabase Connection
+        let dbClient = null;
+        if (window.supabase) {
+            dbClient = window.supabase.createClient('https://gvhptxabpbpnabmxnuix.supabase.co', 'sb_publishable_6-h6NZgscbbKXFbFnEbBXQ_tduRBaIX');
         }
 
-        async function logoutUser() {
-            await supabase.auth.signOut();
-            window.location.href = 'index.html';
-        }
+        window.loadDashboard = async function() {
+            if (!dbClient) return;
 
-        // Run immediately when page loads
-        loadDashboard();
+            try {
+                // 1. Verify User is Logged In
+                const { data: { user }, error: authError } = await dbClient.auth.getUser();
+                if (authError || !user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // 2. Fetch Profile Details
+                const { data: profile } = await dbClient.from('profiles').select('*').eq('id', user.id).single();
+                if (profile) {
+                    document.getElementById('profileName').innerText = profile.full_name;
+                    document.getElementById('profilePhone').innerText = profile.phone || "Not provided";
+                }
+                document.getElementById('profileEmail').innerText = user.email;
+
+                // 3. Fetch Order History
+                const { data: orders, error: ordersError } = await dbClient
+                    .from('orders')
+                    .select('*')
+                    .eq('customer_email', user.email)
+                    .order('created_at', { ascending: false });
+
+                const container = document.getElementById('ordersContainer');
+
+                if (ordersError || !orders || orders.length === 0) {
+                    container.innerHTML = `
+                        <div class="text-center py-16">
+                            <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i class="fa-solid fa-box-open text-2xl text-gray-300"></i>
+                            </div>
+                            <p class="text-gray-500 text-sm font-medium mb-4">You have no recent orders.</p>
+                            <a href="index.html" class="bg-ridax hover:bg-ridax-dark text-white font-bold py-2.5 px-6 rounded text-sm transition shadow-sm inline-block">Start Shopping</a>
+                        </div>`;
+                    return;
+                }
+
+                // Map Orders to UI
+                container.innerHTML = `<div class="space-y-4">` + orders.map(order => {
+                    const date = new Date(order.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+                    const statusColor = order.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800';
+                    
+                    return `
+                        <div class="border border-gray-100 rounded-lg p-4 hover:border-green-200 transition bg-gray-50/50">
+                            <div class="flex justify-between items-start mb-3 border-b border-gray-100 pb-3">
+                                <div>
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Order Date</span>
+                                    <span class="text-sm font-bold text-gray-800">${date}</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Total</span>
+                                    <span class="text-sm font-black text-ridax">₦${order.total_amount.toLocaleString()}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-end">
+                                <div class="text-xs text-gray-500">
+                                    <span class="font-bold text-gray-700">Ref:</span> ${order.payment_reference}<br>
+                                    <span class="font-bold text-gray-700">Method:</span> ${order.payment_method === 'card' ? 'Paystack' : 'Pay on Delivery'}
+                                </div>
+                                <span class="${statusColor} text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">${order.status}</span>
+                            </div>
+                        </div>`;
+                }).join('') + `</div>`;
+
+            } catch (err) {
+                console.error("Dashboard error:", err);
+            }
+        };
+
+        window.handleLogout = async function() {
+            if (!dbClient) return;
+            await dbClient.auth.signOut();
+            window.location.href = 'login.html';
+        };
+
+        // Fire logic on load
+        window.addEventListener('load', window.loadDashboard);
     </script>
 </body>
 </html>
