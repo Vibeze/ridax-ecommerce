@@ -7,18 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { ridax: { DEFAULT: '#1b7a39', dark: '#135c29' } } } } }
+        tailwind.config = { theme: { extend: { colors: { pestzap: { DEFAULT: '#1b7a39', dark: '#135c29' } } } } }
     </script>
 </head>
 <body class="bg-gray-50 flex items-center justify-center min-h-screen py-10 px-4 relative">
 
-    <!-- PREMIUM TOAST NOTIFICATION -->
     <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
     <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full border border-gray-100">
         <div class="text-center mb-8">
-            <a href="index.html" class="text-3xl font-black text-ridax tracking-tighter flex items-center justify-center gap-1 mb-2">
-                <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
+            <a href="index.html" class="text-3xl font-black text-pestzap tracking-tighter flex items-center justify-center gap-2 mb-2">
+                <i class="fa-solid fa-shield-halved text-2xl"></i> PESTZAP
             </a>
             <h2 class="text-xl font-bold text-gray-800">Create your account</h2>
             <p class="text-sm text-gray-500 mt-1">Join to track orders and get faster checkouts.</p>
@@ -27,22 +26,22 @@
         <form id="signupForm" onsubmit="window.handleSignup(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
-                <input type="text" id="fullName" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
+                <input type="text" id="fullName" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-pestzap outline-none bg-gray-50 focus:bg-white transition">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
-                <input type="email" id="email" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
+                <input type="email" id="email" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-pestzap outline-none bg-gray-50 focus:bg-white transition">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone Number</label>
-                <input type="tel" id="phone" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
+                <input type="tel" id="phone" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-pestzap outline-none bg-gray-50 focus:bg-white transition">
             </div>
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
-                <input type="password" id="password" required minlength="6" class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
+                <input type="password" id="password" required minlength="6" class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-pestzap outline-none bg-gray-50 focus:bg-white transition">
             </div>
             
-            <button type="submit" id="submitBtn" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md mt-2">
+            <button type="submit" id="submitBtn" class="w-full bg-pestzap hover:bg-pestzap-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md mt-2">
                 Create Account
             </button>
         </form>
@@ -59,7 +58,7 @@
         </button>
 
         <div class="mt-8 text-center text-sm text-gray-600">
-            Already have an account? <a href="login.html" class="text-ridax font-bold hover:underline">Log in</a>
+            Already have an account? <a href="login.html" class="text-pestzap font-bold hover:underline">Log in</a>
         </div>
     </div>
 
@@ -75,7 +74,6 @@
             toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i><span class="text-sm font-bold tracking-wide">${message}</span>`;
             
             container.appendChild(toast);
-            
             setTimeout(() => toast.classList.remove('translate-x-full', 'opacity-0'), 10);
             setTimeout(() => {
                 toast.classList.add('translate-x-full', 'opacity-0');
@@ -116,14 +114,8 @@
                 }
 
                 window.showToast("Account created successfully! Redirecting...");
-                
-                // Wait 2 seconds so the user can read the premium toast before redirecting
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 2000);
-
+                setTimeout(() => { window.location.href = "index.html"; }, 2000);
             } catch (err) {
-                console.error("Signup error:", err.message);
                 window.showToast(err.message, "error");
                 btn.innerHTML = originalText;
                 btn.disabled = false;
@@ -132,8 +124,8 @@
 
         window.loginWithGoogle = async function() {
             if (!dbClient) return;
-            const { data, error } = await dbClient.auth.signInWithOAuth({ provider: 'google' });
-            if (error) window.showToast("Google Sign-In is not yet configured.", "error");
+            const { error } = await dbClient.auth.signInWithOAuth({ provider: 'google' });
+            if (error) window.showToast("Google Sign-In error.", "error");
         };
     </script>
 </body>
