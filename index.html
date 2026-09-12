@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ridax | Premium Pesticide Marketplace</title>
+    <title>PestZap | Sleep Easy. Pest-Free.</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://js.paystack.co/v1/inline.js"></script>
@@ -12,7 +12,7 @@
     <script>
         tailwind.config = {
             theme: {
-                extend: { colors: { ridax: { DEFAULT: '#1b7a39', dark: '#135c29', light: '#e8f3ec', accent: '#f68b1e' } } }
+                extend: { colors: { pestzap: { DEFAULT: '#1b7a39', dark: '#135c29', light: '#e8f3ec', accent: '#f68b1e' } } }
             }
         }
     </script>
@@ -25,22 +25,21 @@
 </head>
 <body class="bg-[#f2f2f2] text-gray-800 antialiased relative">
 
-    <!-- PREMIUM TOAST NOTIFICATION CONTAINER (NO MORE UGLY ALERTS) -->
     <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-3 pointer-events-none"></div>
 
     <div class="bg-green-900 text-white text-[11px] py-2 px-4 text-center tracking-wide font-medium">
-        To order, WhatsApp/Call: <span class="font-bold">0800-RIDAX-NG</span>. DO NOT MAKE PAYMENTS INTO ANY PERSONAL ACCOUNT!!!
+        To order, WhatsApp/Call: <span class="font-bold">0800-PESTZAP</span>. DO NOT MAKE PAYMENTS INTO ANY PERSONAL ACCOUNT!!!
     </div>
 
     <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-100">
         <div class="max-w-[1400px] mx-auto px-4 py-4 flex items-center justify-between gap-6">
-            <a href="#" class="text-3xl font-black text-ridax tracking-tighter flex items-center gap-1 shrink-0">
-                <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
+            <a href="index.html" class="text-3xl font-black text-pestzap tracking-tighter flex items-center gap-1 shrink-0">
+                <i class="fa-solid fa-bolt text-2xl"></i> PESTZAP
             </a>
             <div class="flex-1 max-w-3xl hidden lg:flex">
-                <div class="relative w-full flex border-2 border-ridax rounded-md overflow-hidden">
-                    <input type="text" placeholder="Search for pesticides, roach powder, bulk packs..." class="w-full pl-4 pr-4 py-2.5 outline-none text-sm">
-                    <button class="bg-ridax text-white px-6 py-2.5 transition hover:bg-ridax-dark"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
+                <div class="relative w-full flex border-2 border-pestzap rounded-md overflow-hidden">
+                    <input type="text" placeholder="Search for PestZap sprays, roach powder, bulk packs..." class="w-full pl-4 pr-4 py-2.5 outline-none text-sm">
+                    <button class="bg-pestzap text-white px-6 py-2.5 transition hover:bg-pestzap-dark"><i class="fa-solid fa-magnifying-glass text-lg"></i></button>
                 </div>
             </div>
             <div class="flex items-center gap-6 shrink-0">
@@ -51,20 +50,20 @@
                         <div class="font-bold text-gray-900">+234 800 000 0000</div>
                     </div>
                 </div>
-                <a href="login.html" id="auth-btn" class="flex items-center gap-2 text-sm font-medium hover:text-ridax cursor-pointer transition">
+                <a href="login.html" id="auth-btn" class="flex items-center gap-2 text-sm font-medium hover:text-pestzap cursor-pointer transition">
                     <i class="fa-regular fa-user text-xl"></i>
                     <span id="auth-text" class="hidden md:inline">Account</span>
                 </a>
-                <button onclick="window.toggleCart()" class="flex items-center gap-2 font-medium hover:text-ridax relative bg-ridax-light px-3 py-2 rounded-md">
+                <button onclick="window.toggleCart()" class="flex items-center gap-2 font-medium hover:text-pestzap relative bg-pestzap-light px-3 py-2 rounded-md">
                     <div class="relative">
-                        <i class="fa-solid fa-cart-shopping text-xl text-ridax"></i>
-                        <span id="cartCount" class="absolute -top-2 -right-2 bg-ridax-accent text-white text-[10px] font-bold rounded-full h-[18px] w-[18px] flex items-center justify-center border border-white">0</span>
+                        <i class="fa-solid fa-cart-shopping text-xl text-pestzap"></i>
+                        <span id="cartCount" class="absolute -top-2 -right-2 bg-pestzap-accent text-white text-[10px] font-bold rounded-full h-[18px] w-[18px] flex items-center justify-center border border-white">0</span>
                     </div>
-                    <span class="hidden md:inline text-sm font-bold text-ridax">₦0.00</span>
+                    <span class="hidden md:inline text-sm font-bold text-pestzap">₦0.00</span>
                 </button>
             </div>
         </div>
-        <div class="bg-ridax text-white hidden md:block">
+        <div class="bg-pestzap text-white hidden md:block">
             <div class="max-w-[1400px] mx-auto px-4 flex gap-6 text-sm font-medium">
                 <a href="#" class="py-2.5 hover:text-green-200"><i class="fa-solid fa-bars mr-2"></i> All Categories</a>
                 <a href="#" class="py-2.5 hover:text-green-200 bg-black/10 px-3">Insecticides</a>
@@ -80,17 +79,17 @@
             <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 mb-4">
                 <h4 class="font-bold text-gray-800 mb-3 text-sm uppercase">Search Products</h4>
                 <div class="relative w-full">
-                    <input type="text" placeholder="Search..." class="w-full pl-3 pr-8 py-2 border border-gray-200 rounded text-sm focus:border-ridax outline-none">
+                    <input type="text" placeholder="Search..." class="w-full pl-3 pr-8 py-2 border border-gray-200 rounded text-sm focus:border-pestzap outline-none">
                     <i class="fa-solid fa-magnifying-glass absolute right-3 top-3 text-gray-400 text-xs"></i>
                 </div>
             </div>
             <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100">
                 <h4 class="font-bold text-gray-800 mb-4 text-sm uppercase border-b pb-2">Price Filter</h4>
                 <ul class="text-sm text-gray-600 space-y-3">
-                    <li class="font-bold text-ridax cursor-pointer">All Prices</li>
-                    <li class="hover:text-ridax cursor-pointer">₦0.00 - ₦15,000</li>
-                    <li class="hover:text-ridax cursor-pointer">₦15,000 - ₦25,000</li>
-                    <li class="hover:text-ridax cursor-pointer">₦25,000 - ₦50,000</li>
+                    <li class="font-bold text-pestzap cursor-pointer">All Prices</li>
+                    <li class="hover:text-pestzap cursor-pointer">₦0.00 - ₦15,000</li>
+                    <li class="hover:text-pestzap cursor-pointer">₦15,000 - ₦25,000</li>
+                    <li class="hover:text-pestzap cursor-pointer">₦25,000 - ₦50,000</li>
                 </ul>
             </div>
         </aside>
@@ -98,8 +97,8 @@
         <div class="flex-1">
             <div class="bg-gradient-to-r from-green-100 to-white border border-green-200 rounded-md p-6 mb-6 flex flex-col sm:flex-row items-center justify-between shadow-sm relative overflow-hidden">
                 <div class="relative z-10">
-                    <span class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded uppercase shadow-sm">Free Shipping</span>
-                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-3">Buy Ridax Eradication Packs<br>on WhatsApp with ease.</h2>
+                    <span class="bg-pestzap text-white text-xs font-bold px-2 py-1 rounded shadow-sm">Helping homes stay protected.</span>
+                    <h2 class="text-2xl md:text-3xl font-black text-gray-900 mt-3">Sleep Easy. Pest-Free.<br>Get PestZap Packs Today.</h2>
                     <button class="mt-4 bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 px-6 rounded-full text-sm shadow-md transition">Order on WhatsApp</button>
                 </div>
                 <i class="fa-brands fa-whatsapp text-[150px] text-green-500/10 absolute -right-4 -bottom-8 z-0 transform -rotate-12"></i>
@@ -109,74 +108,72 @@
                 <h1 class="text-xl font-bold text-gray-800">Insecticides</h1>
             </div>
 
-            <!-- PREMIUM UI GRID -->
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
-                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
-                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-spray-can text-5xl text-gray-300 group-hover:text-ridax transition"></i></div>
+                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-pestzap cursor-pointer"></i></div>
+                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-spray-can text-5xl text-gray-300 group-hover:text-pestzap transition"></i></div>
                     <div class="flex-1 flex flex-col">
-                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Pest Spray (500ml) - Pack of 2</h3>
+                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">PestZap Spray (500ml) - Pack of 2</h3>
                         <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
-                        <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦20,000.00</span></div>
+                        <div class="mt-auto"><span class="text-pestzap font-bold text-lg">₦20,000.00</span></div>
                     </div>
-                    <button onclick="window.addToCart(1, 'Ridax Pest Spray (500ml) - 2 Pack', 20000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
+                    <button onclick="window.addToCart(1, 'PestZap Spray (500ml) - 2 Pack', 20000)" class="w-full mt-3 bg-pestzap hover:bg-pestzap-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
-                    <span class="absolute top-2 left-2 bg-ridax text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">BEST SELLER</span>
-                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
+                    <span class="absolute top-2 left-2 bg-pestzap text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">BEST SELLER</span>
+                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-pestzap cursor-pointer"></i></div>
                     <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center">
                         <div class="flex gap-0.5"><i class="fa-solid fa-spray-can text-4xl text-gray-300"></i><i class="fa-solid fa-spray-can text-5xl text-gray-300"></i></div>
                     </div>
                     <div class="flex-1 flex flex-col">
-                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Pest Spray (500ml) - Pack of 4</h3>
+                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">PestZap Spray (500ml) - Pack of 4</h3>
                         <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦34,000.00</span></div>
+                        <div class="mt-auto"><span class="text-pestzap font-bold text-lg">₦34,000.00</span></div>
                     </div>
-                    <button onclick="window.addToCart(2, 'Ridax Pest Spray (500ml) - 4 Pack', 34000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
+                    <button onclick="window.addToCart(2, 'PestZap Spray (500ml) - 4 Pack', 34000)" class="w-full mt-3 bg-pestzap hover:bg-pestzap-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
                     <span class="absolute top-2 left-2 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">LAGOS ONLY</span>
-                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
-                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-bottle-droplet text-5xl text-gray-300 group-hover:text-ridax transition"></i></div>
+                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-pestzap cursor-pointer"></i></div>
+                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-bottle-droplet text-5xl text-gray-300 group-hover:text-pestzap transition"></i></div>
                     <div class="flex-1 flex flex-col">
-                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Pest Spray (300ml) - Pack of 2</h3>
+                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">PestZap Spray (300ml) - Pack of 2</h3>
                         <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
-                        <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦18,000.00</span></div>
+                        <div class="mt-auto"><span class="text-pestzap font-bold text-lg">₦18,000.00</span></div>
                     </div>
-                    <button onclick="window.addToCart(3, 'Ridax Pest Spray (300ml) - 2 Pack', 18000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
+                    <button onclick="window.addToCart(3, 'PestZap Spray (300ml) - 2 Pack', 18000)" class="w-full mt-3 bg-pestzap hover:bg-pestzap-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
 
                 <div class="bg-white p-4 rounded-md shadow-sm border border-gray-100 hover:shadow-lg transition group relative flex flex-col">
-                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-ridax cursor-pointer"></i></div>
-                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-box-archive text-5xl text-gray-300 group-hover:text-ridax transition"></i></div>
+                    <div class="absolute top-2 right-2 z-10"><i class="fa-regular fa-heart text-gray-300 hover:text-pestzap cursor-pointer"></i></div>
+                    <div class="h-40 bg-gray-50 rounded mb-3 flex items-center justify-center"><i class="fa-solid fa-box-archive text-5xl text-gray-300 group-hover:text-pestzap transition"></i></div>
                     <div class="flex-1 flex flex-col">
-                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">Ridax Cockroach Powder (100g)</h3>
+                        <h3 class="text-sm font-medium text-gray-800 line-clamp-2">PestZap Cockroach Powder (100g)</h3>
                         <div class="text-yellow-400 text-xs mt-1 mb-2"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
-                        <div class="mt-auto"><span class="text-ridax font-bold text-lg">₦12,000.00</span></div>
+                        <div class="mt-auto"><span class="text-pestzap font-bold text-lg">₦12,000.00</span></div>
                     </div>
-                    <button onclick="window.addToCart(4, 'Ridax Cockroach Powder', 12000)" class="w-full mt-3 bg-ridax hover:bg-ridax-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
+                    <button onclick="window.addToCart(4, 'PestZap Cockroach Powder', 12000)" class="w-full mt-3 bg-pestzap hover:bg-pestzap-dark text-white font-bold py-2 rounded text-sm transition">Add To Cart</button>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- FOOTER SECTION -->
     <section class="bg-black text-white py-10 mt-12 border-b border-gray-800">
         <div class="max-w-[1400px] mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="flex gap-4">
                 <i class="fa-solid fa-truck-fast text-3xl text-orange-400"></i>
                 <div>
                     <h5 class="font-bold text-sm mb-1 uppercase">Convenient Delivery</h5>
-                    <p class="text-xs text-gray-400 leading-relaxed">Relax & notify Ridax when you receive your item(s) at your location.</p>
+                    <p class="text-xs text-gray-400 leading-relaxed">Relax & notify PestZap when you receive your item(s) at your location.</p>
                 </div>
             </div>
             <div class="flex gap-4">
                 <i class="fa-solid fa-credit-card text-3xl text-orange-400"></i>
                 <div>
                     <h5 class="font-bold text-sm mb-1 uppercase">Safe Payment</h5>
-                    <p class="text-xs text-gray-400 leading-relaxed">Make safe and secure payment into Ridax Holding Account via Paystack.</p>
+                    <p class="text-xs text-gray-400 leading-relaxed">Make safe and secure payment into PestZap Holding Account via Paystack.</p>
                 </div>
             </div>
             <div class="flex gap-4">
@@ -204,7 +201,7 @@
                 <i class="fa-brands fa-cc-visa text-2xl"></i>
                 <i class="fa-solid fa-building-columns text-xl"></i>
             </div>
-            <div>© 2026 Ridax Eradication Systems.</div>
+            <div>© 2026 PestZap Eradication Systems.</div>
         </div>
     </footer>
 
@@ -212,44 +209,41 @@
         <i class="fa-brands fa-whatsapp text-3xl"></i>
     </a>
 
-    <!-- CART DRAWER -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
         <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" onclick="window.toggleCart()"></div>
         <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col z-10 transform transition-transform duration-300">
             <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-ridax"></i> Shopping Cart</h3>
+                <h3 class="font-bold text-gray-800 flex items-center gap-2"><i class="fa-solid fa-cart-shopping text-pestzap"></i> Shopping Cart</h3>
                 <button onclick="window.toggleCart()" class="text-gray-400 hover:text-gray-800 text-xl font-bold">✕</button>
             </div>
             <div id="cartItems" class="flex-1 overflow-y-auto p-4 divide-y divide-gray-100"></div>
             <div class="p-4 border-t border-gray-100 bg-white">
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-sm font-medium text-gray-600">Total:</span>
-                    <span id="cartTotal" class="text-2xl font-black text-ridax">₦0.00</span>
+                    <span id="cartTotal" class="text-2xl font-black text-pestzap">₦0.00</span>
                 </div>
-                <button onclick="window.handleCheckoutClick()" id="checkoutBtn" disabled class="w-full bg-ridax hover:bg-ridax-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
+                <button onclick="window.handleCheckoutClick()" id="checkoutBtn" disabled class="w-full bg-pestzap hover:bg-pestzap-dark disabled:bg-gray-300 text-white font-bold py-3.5 rounded-md text-sm uppercase transition shadow-md">
                     Checkout Now
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- PREMIUM AUTH MODAL -->
     <div id="authModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeAuthModal()"></div>
         <div class="relative bg-white rounded-lg max-w-sm w-full p-8 shadow-2xl z-10 text-center transform transition-all">
             <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner">
-                <i class="fa-solid fa-user-lock text-3xl text-ridax"></i>
+                <i class="fa-solid fa-user-lock text-3xl text-pestzap"></i>
             </div>
             <h3 class="font-black text-xl text-gray-900 mb-2">Sign In Required</h3>
             <p class="text-sm text-gray-500 mb-6 leading-relaxed">To securely process your order and track your delivery, please log in or create a free account.</p>
             <div class="space-y-3">
-                <a href="login.html" class="block w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md">Log In / Sign Up</a>
+                <a href="login.html" class="block w-full bg-pestzap hover:bg-pestzap-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md">Log In / Sign Up</a>
                 <button onclick="window.closeAuthModal()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3 rounded text-sm uppercase transition">Cancel</button>
             </div>
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL FORM (DYNAMIC STATES VERSION) -->
     <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="window.closeCheckoutModal()"></div>
         <div class="relative bg-white rounded-lg max-w-lg w-full p-6 shadow-2xl z-10 max-h-[90vh] overflow-y-auto">
@@ -261,55 +255,54 @@
                 <div class="space-y-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Full Name</label>
-                        <input type="text" id="custName" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                        <input type="text" id="custName" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-pestzap outline-none">
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email</label>
-                            <input type="email" id="custEmail" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <input type="email" id="custEmail" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-pestzap outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Phone</label>
-                            <input type="tel" id="custPhone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                            <input type="tel" id="custPhone" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-pestzap outline-none">
                         </div>
                     </div>
                     
-                    <!-- DYNAMIC DROPDOWNS -->
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">State</label>
-                            <select id="custState" onchange="window.updateCities()" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none bg-white">
+                            <select id="custState" onchange="window.updateCities()" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-pestzap outline-none bg-white">
                                 <option value="">Select State</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-1">City / L.G.A</label>
-                            <select id="custCity" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none bg-white disabled:bg-gray-100" disabled>
+                            <select id="custCity" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-pestzap outline-none bg-white disabled:bg-gray-100" disabled>
                                 <option value="">Select City / L.G.A</option>
                             </select>
                         </div>
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Precise Address</label>
-                        <input type="text" id="custAddress" placeholder="e.g. 22 Road, Festac Town" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-ridax outline-none">
+                        <input type="text" id="custAddress" placeholder="e.g. 22 Road, Festac Town" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:border-pestzap outline-none">
                     </div>
 
                     <div class="pt-2">
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Payment Method</label>
                         <div class="space-y-2">
-                            <label class="flex items-center p-3 border rounded cursor-pointer hover:border-ridax bg-gray-50 transition">
-                                <input type="radio" name="payType" value="card" checked class="text-ridax focus:ring-ridax accent-ridax">
+                            <label class="flex items-center p-3 border rounded cursor-pointer hover:border-pestzap bg-gray-50 transition">
+                                <input type="radio" name="payType" value="card" checked class="text-pestzap focus:ring-pestzap accent-pestzap">
                                 <span class="ml-2 text-sm font-medium">Pay Securely via Card (Paystack)</span>
                             </label>
-                            <label class="flex items-center p-3 border rounded cursor-pointer hover:border-ridax bg-gray-50 transition">
-                                <input type="radio" name="payType" value="pod" class="text-ridax focus:ring-ridax accent-ridax">
+                            <label class="flex items-center p-3 border rounded cursor-pointer hover:border-pestzap bg-gray-50 transition">
+                                <input type="radio" name="payType" value="pod" class="text-pestzap focus:ring-pestzap accent-pestzap">
                                 <span class="ml-2 text-sm font-medium">Pay on Delivery (PoD)</span>
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="mt-6 border-t pt-4">
-                    <button type="button" id="paySubmitBtn" onclick="window.processOrder()" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2">
+                    <button type="button" id="paySubmitBtn" onclick="window.processOrder()" class="w-full bg-pestzap hover:bg-pestzap-dark text-white font-bold py-3.5 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2">
                         <i class="fa-solid fa-lock"></i> Pay <span id="modalTotal">₦0.00</span>
                     </button>
                 </div>
@@ -317,16 +310,12 @@
         </div>
     </div>
 
-   <!-- MAIN JAVASCRIPT ENGINE -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // PREMIUM TOAST UI SYSTEM
         window.showToast = function(message, type = 'success') {
             const container = document.getElementById('toast-container');
             const existingToasts = container.querySelectorAll('span');
-            for (let t of existingToasts) {
-                if (t.innerText === message) return;
-            }
+            for (let t of existingToasts) { if (t.innerText === message) return; }
 
             const toast = document.createElement('div');
             const bgColor = type === 'error' ? 'bg-red-600' : 'bg-green-600';
@@ -344,7 +333,6 @@
             }, 4500);
         };
 
-        // COMPLETE 36 NIGERIAN STATES & LGAS DICTIONARY
         const naijaLocations = {
             "Abia": ["Aba North","Aba South","Arochukwu","Bende","Ikwuano","Isiala Ngwa North","Isiala Ngwa South","Isuikwuato","Obi Ngwa","Ohafia","Osisioma","Ugwunagbo","Ukwa East","Ukwa West","Umuahia North","Umuahia South","Umu Nneochi"],
             "Abuja (FCT)": ["Abaji","Bwari","Gwagwalada","Kuje","Kwali","Municipal Area Council (AMAC)"],
@@ -385,7 +373,6 @@
             "Zamfara": ["Anka","Bakura","Birnin Magaji/Kiyaw","Bukkuyum","Bungudu","Gummi","Gusau","Kaura Namoda","Maradun","Maru","Shinkafi","Talata Mafara","Chafe","Zurmi"]
         };
 
-        // POPULATE STATES ON LOAD
         window.addEventListener('DOMContentLoaded', () => {
             const stateSelect = document.getElementById('custState');
             if(stateSelect) {
@@ -398,7 +385,6 @@
             }
         });
 
-        // UPDATE CITIES DYNAMICALLY
         window.updateCities = function() {
             const stateSelect = document.getElementById('custState');
             const citySelect = document.getElementById('custCity');
@@ -421,7 +407,6 @@
             }
         };
 
-        // SYSTEM GLOBALS
         let appCart = [];
         let dbClient = null;
         let activeUser = null;
@@ -446,7 +431,7 @@
                         if (authText) authText.innerText = 'Hi, ' + firstName;
                         if (authBtn) {
                             authBtn.href = 'dashboard.html'; 
-                            authBtn.classList.add('text-ridax', 'font-bold');
+                            authBtn.classList.add('text-pestzap', 'font-bold');
                         }
                     }
                 }
@@ -494,7 +479,7 @@
                     <div class="py-4 flex justify-between items-center border-b border-gray-50">
                         <div class="flex-1 pr-4">
                             <h5 class="text-sm font-semibold">${item.name}</h5>
-                            <span class="text-sm font-bold text-ridax mt-1 block">₦${item.price.toLocaleString()}</span>
+                            <span class="text-sm font-bold text-pestzap mt-1 block">₦${item.price.toLocaleString()}</span>
                         </div>
                         <div class="flex items-center gap-3 bg-gray-50 p-1 rounded">
                             <button onclick="window.updateQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center font-bold text-gray-600">-</button>
@@ -565,7 +550,7 @@
                 }
 
                 if (appCart.some(item => item.id === 3) && state !== 'Lagos') {
-                    window.showToast("Delivery Error: Ridax 300ml 2-pack is restricted to Lagos State only.", "error");
+                    window.showToast("Delivery Error: PestZap 300ml 2-pack is restricted to Lagos State only.", "error");
                     if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
                     return;
                 }
@@ -580,34 +565,31 @@
                     return;
                 }
 
-               const saveOrderToDatabase = async (reference) => {
+                const saveOrderToDatabase = async (reference) => {
                     if (!dbClient) throw new Error("Database unavailable");
                     
                     const { error } = await dbClient.from('orders').insert([{
                         customer_name: name, customer_email: email, customer_phone: phone,
                         delivery_address: fullAddress, state: state, total_amount: totalPrice,
                         cart_items: appCart, payment_reference: reference, status: 'pending',
-                        // FILLING YOUR EXTRA COLUMNS TO STOP THE 400 ERROR:
                         payment_method: payType,
                         payment_status: payType === 'card' ? 'Paid' : 'Pending',
                         delivery_status: 'Processing'
                     }]);
                     
                     if (error) {
-                        // This forces the console to print the exact problem if it ever fails again
                         console.error("EXACT SUPABASE ERROR:", error); 
                         throw new Error(error.message || "Database insert failed");
                     }
                 };
 
                 if (payType === 'card') {
-                    // FIX: Standard function wrapper for Paystack callback to prevent async crash
                     let handler = window.PaystackPop.setup({
-                        key: 'pk_test_1263258844e391426936d45b3c68bfa80d61773b',
+                        key: 'pk_test_1263258844c391426936d45b3c68bfa80d61773b',
                         email: email,
                         amount: totalPrice * 100, 
                         currency: 'NGN',
-                        ref: 'RDX_' + Math.floor((Math.random() * 1000000000) + 1),
+                        ref: 'PZ_' + Math.floor((Math.random() * 1000000000) + 1),
                         callback: function(response) {
                             (async function() {
                                 try {
@@ -635,7 +617,6 @@
                 }
             } catch (err) {
                 console.error("Order error:", err);
-                // FIX: Premium, masked error message instead of raw code exposure
                 window.showToast("Payment could not be completed. Please try again or choose Pay on Delivery.", "error");
                 if (payBtn) { payBtn.innerHTML = originalBtnHtml; payBtn.disabled = false; }
             }
