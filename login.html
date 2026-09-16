@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | PestZap</title>
+    <title>Login | Ridax</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { pestzap: { DEFAULT: '#1b7a39', dark: '#135c29' } } } } }
+        tailwind.config = { theme: { extend: { colors: { ridax: { DEFAULT: '#1b7a39', dark: '#135c29' } } } } }
     </script>
 </head>
 <body class="bg-gray-50 flex items-center justify-center min-h-screen py-10 px-4 relative">
@@ -16,27 +16,27 @@
 
     <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full border border-gray-100">
         <div class="text-center mb-8">
-            <a href="index.html" class="text-3xl font-black text-pestzap tracking-tighter flex items-center justify-center gap-2 mb-2">
-                <i class="fa-solid fa-shield-halved text-2xl"></i> PESTZAP
+            <a href="index.html" class="text-3xl font-black text-ridax tracking-tighter flex items-center justify-center gap-2 mb-2">
+                <i class="fa-solid fa-leaf text-2xl"></i> RIDAX
             </a>
             <h2 class="text-xl font-bold text-gray-800">Welcome back</h2>
-            <p class="text-sm text-gray-500 mt-1">Log in to your PestZap account.</p>
+            <p class="text-sm text-gray-500 mt-1">Log in to your Ridax account.</p>
         </div>
 
         <form id="loginForm" onsubmit="window.handleLogin(event)" class="space-y-4">
             <div>
                 <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Email Address</label>
-                <input type="email" id="email" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-pestzap outline-none bg-gray-50 focus:bg-white transition">
+                <input type="email" id="email" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
             </div>
             <div>
                 <div class="flex justify-between items-center mb-1">
                     <label class="block text-xs font-bold text-gray-700 uppercase">Password</label>
-                    <a href="#" class="text-xs font-bold text-pestzap hover:underline">Forgot password?</a>
+                    <a href="#" class="text-xs font-bold text-ridax hover:underline">Forgot password?</a>
                 </div>
-                <input type="password" id="password" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-pestzap outline-none bg-gray-50 focus:bg-white transition">
+                <input type="password" id="password" required class="w-full border border-gray-300 rounded px-3 py-2.5 text-sm focus:border-ridax outline-none bg-gray-50 focus:bg-white transition">
             </div>
             
-            <button type="submit" id="submitBtn" class="w-full bg-pestzap hover:bg-pestzap-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md mt-2">
+            <button type="submit" id="submitBtn" class="w-full bg-ridax hover:bg-ridax-dark text-white font-bold py-3 rounded text-sm uppercase transition shadow-md mt-2">
                 Log In
             </button>
         </form>
@@ -53,7 +53,7 @@
         </button>
 
         <div class="mt-8 text-center text-sm text-gray-600">
-            Don't have an account? <a href="signup.html" class="text-pestzap font-bold hover:underline">Sign up</a>
+            Don't have an account? <a href="signup.html" class="text-ridax font-bold hover:underline">Sign up</a>
         </div>
     </div>
 
