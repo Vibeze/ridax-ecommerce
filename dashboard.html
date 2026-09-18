@@ -10,32 +10,39 @@
         tailwind.config = { theme: { extend: { colors: { ridax: { DEFAULT: '#1b7a39', dark: '#135c29' } } } } }
     </script>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
-    <header class="bg-white shadow-sm border-b border-gray-100 py-4 px-6 flex justify-between items-center max-w-[1400px] mx-auto">
-        <a href="index.html" class="text-2xl font-black text-ridax flex items-center gap-2">
-            <i class="fa-solid fa-leaf"></i> RIDAX
-        </a>
-        <div class="flex gap-6 text-sm font-bold items-center">
-            <a href="index.html" class="text-gray-500 hover:text-ridax transition"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Store</a>
-            <button onclick="window.handleLogout()" class="text-red-500 hover:text-red-700 transition">Logout</button>
+<body class="bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col">
+    <header class="bg-white shadow-sm border-b border-gray-100 py-4 px-6 flex justify-between items-center w-full z-10">
+        <div class="max-w-[1400px] mx-auto w-full flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-ridax flex items-center gap-2">
+                <i class="fa-solid fa-leaf"></i> RIDAX
+            </a>
+            <div class="flex gap-6 text-sm font-bold items-center">
+                <a href="index.html" class="text-gray-500 hover:text-ridax transition"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Store</a>
+                <button onclick="window.handleLogout()" class="text-red-500 hover:text-red-700 transition">Logout</button>
+            </div>
         </div>
     </header>
 
-    <main class="max-w-[1200px] mx-auto px-4 py-10 flex flex-col md:flex-row gap-8">
+    <main class="max-w-[1200px] w-full mx-auto px-4 py-10 flex flex-col md:flex-row gap-8 flex-1">
         <!-- Profile Sidebar -->
         <aside class="w-full md:w-1/3 lg:w-1/4 shrink-0">
             <h2 class="text-xl font-bold mb-4 text-gray-900">My Account</h2>
-            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center relative overflow-hidden">
                 <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-ridax text-2xl shadow-inner">
                     <i class="fa-solid fa-user"></i>
                 </div>
                 <h3 id="profileName" class="font-black text-lg text-gray-900">Loading...</h3>
                 <p id="profileEmail" class="text-sm text-gray-500 mb-5">...</p>
                 
-                <div class="text-left border-t border-gray-100 pt-4">
+                <div class="text-left border-t border-gray-100 pt-4 mb-4">
                     <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Phone Number</label>
                     <p id="profilePhone" class="text-sm font-medium text-gray-800">...</p>
                 </div>
+
+                <!-- THE MAGIC ADMIN BUTTON (Hidden by default) -->
+                <a href="admin.html" id="magicAdminButton" class="hidden w-full bg-gray-900 hover:bg-black text-white font-bold py-3 px-4 rounded text-sm uppercase transition shadow-md flex items-center justify-center gap-2 mt-4 border border-gray-800">
+                    <i class="fa-solid fa-user-shield text-ridax"></i> Command Center
+                </a>
             </div>
         </aside>
 
@@ -45,7 +52,7 @@
             <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 min-h-[300px]" id="ordersContainer">
                 <div class="text-center py-16">
                     <i class="fa-solid fa-spinner fa-spin text-4xl text-gray-300 mb-4"></i>
-                    <p class="text-gray-500 text-sm font-medium">Fetching your order history...</p>
+                    <p class="text-gray-500 text-sm font-medium">Fetching your secure order history...</p>
                 </div>
             </div>
         </div>
@@ -53,6 +60,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // --- MASTER ADMIN LIST ---
+        // If the logged-in user matches any email here, the magic button appears.
+        const ADMIN_EMAILS = [
+            "chibuikethankgod134@gmail.com",
+            "lawrence_placeholder@gmail.com"
+        ];
+
         // Bulletproof Supabase Connection
         let dbClient = null;
         if (window.supabase) {
@@ -63,19 +77,34 @@
             if (!dbClient) return;
 
             try {
+                // 1. Verify User is Logged In
                 const { data: { user }, error: authError } = await dbClient.auth.getUser();
                 if (authError || !user) {
                     window.location.href = 'login.html';
                     return;
                 }
 
+                // 2. TRIGGER THE MAGIC ADMIN BUTTON
+                if (ADMIN_EMAILS.includes(user.email)) {
+                    const adminBtn = document.getElementById('magicAdminButton');
+                    if (adminBtn) {
+                        adminBtn.classList.remove('hidden');
+                        adminBtn.classList.add('flex');
+                    }
+                }
+
+                // 3. Fetch Profile Details
                 const { data: profile } = await dbClient.from('profiles').select('*').eq('id', user.id).single();
                 if (profile) {
-                    document.getElementById('profileName').innerText = profile.full_name;
+                    document.getElementById('profileName').innerText = profile.full_name || "Valued Customer";
                     document.getElementById('profilePhone').innerText = profile.phone || "Not provided";
+                } else {
+                    document.getElementById('profileName').innerText = "Valued Customer";
+                    document.getElementById('profilePhone').innerText = "Not provided";
                 }
                 document.getElementById('profileEmail').innerText = user.email;
 
+                // 4. Fetch Order History
                 const { data: orders, error: ordersError } = await dbClient
                     .from('orders')
                     .select('*')
@@ -96,6 +125,7 @@
                     return;
                 }
 
+                // Map Orders to UI
                 container.innerHTML = `<div class="space-y-4">` + orders.map(order => {
                     const date = new Date(order.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
                     const statusColor = order.status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800';
@@ -109,7 +139,7 @@
                                 </div>
                                 <div class="text-right">
                                     <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Total</span>
-                                    <span class="text-sm font-black text-ridax">₦${order.total_amount.toLocaleString()}</span>
+                                    <span class="text-sm font-black text-ridax">₦${Number(order.total_amount).toLocaleString()}</span>
                                 </div>
                             </div>
                             <div class="flex justify-between items-end">
@@ -133,6 +163,7 @@
             window.location.href = 'login.html';
         };
 
+        // Fire logic on load
         window.addEventListener('load', window.loadDashboard);
     </script>
 </body>
