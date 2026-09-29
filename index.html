@@ -429,22 +429,24 @@
             }
         } catch(e) { console.warn("Supabase init blocked:", e); }
 
-        window.checkAuthState = async function() {
+       window.checkAuthState = async function() {
             if (!dbClient) return;
             try {
                 const { data: { user } } = await dbClient.auth.getUser();
                 if (user) {
                     activeUser = user;
+                    
+                    // 1. Instantly change the link to the dashboard because they ARE logged in
+                    const authBtn = document.getElementById('auth-btn');
+                    authBtn.href = 'dashboard.html'; 
+                    authBtn.classList.add('text-brand', 'font-bold');
+
+                    // 2. Try to fetch the name, but don't break the link if it's missing
                     const { data: profile } = await dbClient.from('profiles').select('full_name').eq('id', user.id).single();
                     if (profile && profile.full_name) {
-                        const firstName = profile.full_name.split(' ')[0];
-                        const authBtn = document.getElementById('auth-btn');
-                        const authText = document.getElementById('auth-text');
-                        if (authText) authText.innerText = 'Hi, ' + firstName;
-                        if (authBtn) {
-                            authBtn.href = 'dashboard.html'; 
-                            authBtn.classList.add('text-ridax', 'font-bold');
-                        }
+                        document.getElementById('auth-text').innerText = 'Hi, ' + profile.full_name.split(' ')[0];
+                    } else {
+                        document.getElementById('auth-text').innerText = 'My Dashboard';
                     }
                 }
             } catch(e) {}
